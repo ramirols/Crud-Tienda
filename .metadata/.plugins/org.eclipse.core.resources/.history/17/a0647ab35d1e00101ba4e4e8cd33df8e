@@ -1,0 +1,78 @@
+package cibertec;
+
+import javax.swing.JDialog;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ListarRefrigeradoras extends JDialog {
+
+	private static final long serialVersionUID = 1L;
+	private JTextArea textArea;
+
+	public ListarRefrigeradoras() {
+		setTitle("Listado de refrigeradoras");
+		setBounds(100, 100, 400, 300);
+		setModal(true);
+		getContentPane().setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 364, 200);
+		getContentPane().add(scrollPane);
+
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		scrollPane.setViewportView(textArea);
+
+		JButton btnListar = new JButton("Listar");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listarRefrigeradoras();
+			}
+		});
+		btnListar.setBounds(200, 220, 85, 23);
+		getContentPane().add(btnListar);
+
+		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCerrar.setBounds(80, 220, 85, 23);
+		getContentPane().add(btnCerrar);
+	}
+
+	protected void listarRefrigeradoras() {
+		textArea.setText("");
+
+		for (int i = 0; i < 5; i++) {
+			textArea.append("Refrigeradora " + (i + 1) + ":\n");
+			textArea.append("Modelo: " + obtener("modelo", i) + "\n");
+			textArea.append(String.format("Precio: $%.2f\n", obtenerDouble("precio", i)));
+			textArea.append(String.format("Fondo: %.1f cm\n", obtenerDouble("fondo", i)));
+			textArea.append(String.format("Ancho: %.1f cm\n", obtenerDouble("ancho", i)));
+			textArea.append(String.format("Alto: %.1f cm\n\n", obtenerDouble("alto", i)));
+		}
+	}
+
+	private String obtener(String base, int index) {
+		try {
+			return (String) Tienda.class.getField(base + index).get(null);
+		} catch (Exception e) {
+			System.err.println("Error al obtener " + base + index + ": " + e.getMessage());
+			return "N/D";
+		}
+	}
+
+	private double obtenerDouble(String base, int index) {
+		try {
+			return Tienda.class.getField(base + index).getDouble(null);
+		} catch (Exception e) {
+			System.err.println("Error al obtener " + base + index + ": " + e.getMessage());
+			return 0.0;
+		}
+	}
+}

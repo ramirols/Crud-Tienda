@@ -1,0 +1,114 @@
+package cibertec;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+
+public class Vender extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JComboBox comboBox;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
+	private JButton btnVender;
+	private JButton btnCerrar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Vender frame = new Vender();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vender() {
+		setTitle("Vender");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 550, 401);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("Modelo");
+		lblNewLabel.setBounds(10, 11, 59, 14);
+		contentPane.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("Precio (S/)");
+		lblNewLabel_1.setBounds(10, 47, 59, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("Cantidad");
+		lblNewLabel_2.setBounds(10, 90, 59, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Prueba"}));
+		comboBox.setBounds(96, 7, 191, 18);
+		contentPane.add(comboBox);
+		
+		textField = new JTextField();
+		textField.setBounds(96, 44, 191, 17);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(96, 87, 191, 17);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 138, 514, 200);
+		contentPane.add(scrollPane);
+		
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+		
+		btnVender = new JButton("Vender");
+		btnVender.setBounds(389, 7, 117, 30);
+		contentPane.add(btnVender);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(389, 59, 117, 30);
+		contentPane.add(btnCerrar);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		dispose();
+	}
+}

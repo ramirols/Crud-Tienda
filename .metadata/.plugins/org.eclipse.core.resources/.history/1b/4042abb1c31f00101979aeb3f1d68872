@@ -1,0 +1,120 @@
+package cibertec;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class ConfigurarDescuentos extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
+	private JButton btnNewButton;
+	private JButton btnVender;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConfigurarDescuentos frame = new ConfigurarDescuentos();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ConfigurarDescuentos() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 168);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("1 a 5 unidades");
+		lblNewLabel.setBounds(10, 11, 106, 14);
+		contentPane.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("6 a 10 unidades");
+		lblNewLabel_1.setBounds(10, 39, 106, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("11 a 15 unidades");
+		lblNewLabel_2.setBounds(10, 70, 106, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		lblNewLabel_3 = new JLabel("M\u00E1s de 15 unidades");
+		lblNewLabel_3.setBounds(10, 102, 106, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		textField = new JTextField();
+		textField.setBounds(140, 8, 120, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(140, 36, 120, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(140, 67, 120, 20);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(140, 99, 120, 20);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+		
+		lblNewLabel_4 = new JLabel("%");
+		lblNewLabel_4.setBounds(270, 11, 24, 14);
+		contentPane.add(lblNewLabel_4);
+		
+		lblNewLabel_5 = new JLabel("%");
+		lblNewLabel_5.setBounds(270, 39, 24, 14);
+		contentPane.add(lblNewLabel_5);
+		
+		lblNewLabel_6 = new JLabel("%");
+		lblNewLabel_6.setBounds(270, 70, 24, 14);
+		contentPane.add(lblNewLabel_6);
+		
+		lblNewLabel_7 = new JLabel("%");
+		lblNewLabel_7.setBounds(270, 102, 24, 14);
+		contentPane.add(lblNewLabel_7);
+		
+		btnNewButton = new JButton("Aceptar");
+		btnNewButton.setBounds(304, 11, 106, 29);
+		contentPane.add(btnNewButton);
+		
+		btnVender = new JButton("Vender");
+		btnVender.setBounds(304, 51, 106, 29);
+		contentPane.add(btnVender);
+	}
+}

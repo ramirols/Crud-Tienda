@@ -1,0 +1,51 @@
+package cibertec;
+
+import javax.swing.JDialog;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
+public class ConsultarRefrigeradora extends JDialog {
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JComboBox comboBox;
+
+    public ConsultarRefrigeradora() {
+        setTitle("Consultar Refrigeradora");
+        setBounds(100, 100, 450, 300);
+        getContentPane().setLayout(null);
+
+        JButton btnCerrar = new JButton("Cerrar");
+        btnCerrar.setBounds(361, 34, 63, 23);
+        getContentPane().add(btnCerrar);
+        
+        lblNewLabel = new JLabel("Modelo");
+        lblNewLabel.setBounds(10, 15, 46, 14);
+        getContentPane().add(lblNewLabel);
+        
+        lblNewLabel_1 = new JLabel("Precio (S/)");
+        lblNewLabel_1.setBounds(10, 40, 63, 14);
+        getContentPane().add(lblNewLabel_1);
+        
+        lblNewLabel_2 = new JLabel("Ancho (cm)");
+        lblNewLabel_2.setBounds(10, 65, 78, 14);
+        getContentPane().add(lblNewLabel_2);
+        
+        lblNewLabel_3 = new JLabel("Alto (cm)");
+        lblNewLabel_3.setBounds(10, 90, 46, 14);
+        getContentPane().add(lblNewLabel_3);
+        
+        lblNewLabel_4 = new JLabel("Fondo (cm)");
+        lblNewLabel_4.setBounds(10, 115, 63, 14);
+        getContentPane().add(lblNewLabel_4);
+        
+        comboBox = new JComboBox();
+        comboBox.setBounds(195, 11, 30, 22);
+        getContentPane().add(comboBox);
+    }
+}
