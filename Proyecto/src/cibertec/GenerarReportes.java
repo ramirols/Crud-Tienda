@@ -1,84 +1,215 @@
 package cibertec;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.event.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class GenerarReportes extends JFrame implements ActionListener {
+public class GenerarReportes extends JDialog implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JLabel lblNewLabel;
-	private JComboBox comboBox;
-	private JScrollPane scrollPane;
-	private JTextArea textArea;
-	private JButton btnNewButton;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JLabel lblNewLabel;
+    private JComboBox<String> comboBox;
+    private JScrollPane scrollPane;
+    private JTextArea textArea;
+    private JButton btnCerrar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GenerarReportes frame = new GenerarReportes();
-					frame.setVisible(true);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    // Variables de apoyo
+    private String[] tiposReportes = {
+        "Ventas por Modelo",
+        "Ventas en Relación a la Venta Óptima",
+        "Precios en Relación al Precio Promedio",
+        "Promedios, Menores y Mayores"
+    };
 
-	/**
-	 * Create the frame.
-	 */
-	public GenerarReportes() {
-		setTitle("Generar reportes");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 341);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    // Datos de ventas (Ejemplo, puedes usar un arreglo o más variables globales si es necesario)
+    private int[] ventasPorModelo = {2, 2, 2, 2, 2};  // Ejemplo de cantidad de ventas por modelo
+    private int[] unidadesVendidas = {14, 21, 10, 2, 3};  // Ejemplo de unidades vendidas
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		lblNewLabel = new JLabel("Tipo de reporte");
-		lblNewLabel.setBounds(10, 11, 103, 20);
-		contentPane.add(lblNewLabel);
-		
-		comboBox = new JComboBox();
-		comboBox.setBounds(118, 10, 274, 21);
-		contentPane.add(comboBox);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 51, 514, 228);
-		contentPane.add(scrollPane);
-		
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
-		
-		btnNewButton = new JButton("Cerrar");
-		btnNewButton.addActionListener(this);
-		btnNewButton.setBounds(403, 10, 121, 30);
-		contentPane.add(btnNewButton);
-	}
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton) {
-			actionPerformedBtnNewButton(e);
-		}
-	}
-	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		dispose();
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    GenerarReportes frame = new GenerarReportes();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public GenerarReportes() {
+        setTitle("Generar reportes");
+        setBounds(100, 100, 550, 341);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        lblNewLabel = new JLabel("Tipo de reporte");
+        lblNewLabel.setBounds(10, 11, 103, 20);
+        contentPane.add(lblNewLabel);
+
+        comboBox = new JComboBox<>(tiposReportes);
+        comboBox.setBounds(118, 10, 274, 21);
+        comboBox.addActionListener(this);
+        contentPane.add(comboBox);
+
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 51, 514, 228);
+        contentPane.add(scrollPane);
+
+        textArea = new JTextArea();
+        scrollPane.setViewportView(textArea);
+
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setBounds(403, 10, 121, 30);
+        btnCerrar.addActionListener(this);
+        contentPane.add(btnCerrar);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnCerrar) {
+            dispose();
+        } else if (e.getSource() == comboBox) {
+            generarReporte();
+        }
+    }
+
+    private void generarReporte() {
+        int opcion = comboBox.getSelectedIndex();
+        switch (opcion) {
+            case 0:
+                mostrarVentasPorModelo();
+                break;
+            case 1:
+                mostrarVentasRelacionVentaOptima();
+                break;
+            case 2:
+                mostrarPreciosRelacionPrecioPromedio();
+                break;
+            case 3:
+                mostrarPromediosMenoresMayores();
+                break;
+        }
+    }
+
+    // Método para mostrar las ventas por modelo
+    private void mostrarVentasPorModelo() {
+        String reporte = "VENTAS POR MODELO\n";
+        for (int i = 0; i < 5; i++) {
+            double importeTotal = unidadesVendidas[i] * obtenerPrecioPorModelo(i);
+            double aporteCuotaDiaria = (importeTotal / Tienda.cuotaDiaria) * 100;
+            reporte += "Modelo: " + obtenerModeloPorIndice(i) + "\n";
+            reporte += "Cantidad de ventas: " + ventasPorModelo[i] + "\n";
+            reporte += "Cantidad de unidades vendidas: " + unidadesVendidas[i] + "\n";
+            reporte += "Importe total vendido: S/. " + String.format("%.2f", importeTotal) + "\n";
+            reporte += "Aporte a la cuota diaria: " + String.format("%.2f", aporteCuotaDiaria) + "%\n\n";
+        }
+        textArea.setText(reporte);
+    }
+
+    // Método para mostrar las ventas en relación a la venta óptima
+    private void mostrarVentasRelacionVentaOptima() {
+        String reporte = "VENTAS EN RELACIÓN A LA VENTA ÓPTIMA\n";
+        for (int i = 0; i < 5; i++) {
+            int diferencia = unidadesVendidas[i] - Tienda.cantidadOptima;
+            String comparacion = diferencia > 0 ? 
+                "(" + diferencia + " más que la cantidad óptima)" : 
+                (diferencia < 0 ? 
+                "(" + (-diferencia) + " menos que la cantidad óptima)" : 
+                "(igual a la cantidad óptima)");
+            reporte += "Modelo: " + obtenerModeloPorIndice(i) + "\n";
+            reporte += "Cantidad de unidades vendidas: " + unidadesVendidas[i] + " " + comparacion + "\n\n";
+        }
+        textArea.setText(reporte);
+    }
+
+    // Método para mostrar los precios en relación al precio promedio
+    private void mostrarPreciosRelacionPrecioPromedio() {
+        double precioPromedio = obtenerPrecioPromedio();
+        String reporte = "PRECIOS EN RELACIÓN AL PRECIO PROMEDIO\n";
+        for (int i = 0; i < 5; i++) {
+            double precio = obtenerPrecioPorModelo(i);
+            String comparacion = (precio > precioPromedio) ? 
+                "(Mayor al promedio)" : (precio < precioPromedio) ? 
+                "(Menor al promedio)" : 
+                "(Igual al promedio)";
+            reporte += "Modelo: " + obtenerModeloPorIndice(i) + "\n";
+            reporte += "Precio: S/. " + precio + " " + comparacion + "\n\n";
+        }
+        textArea.setText(reporte);
+    }
+
+    // Método para mostrar promedios, menores y mayores
+    private void mostrarPromediosMenoresMayores() {
+        double precioPromedio = obtenerPrecioPromedio();
+        double precioMenor = obtenerPrecioMenor();
+        double precioMayor = obtenerPrecioMayor();
+        double anchoPromedio = obtenerAnchoPromedio();
+        double anchoMenor = obtenerAnchoMenor();
+        double anchoMayor = obtenerAnchoMayor();
+
+        String reporte = "PROMEDIOS, MENORES Y MAYORES\n";
+        reporte += "Precio promedio: S/. " + String.format("%.2f", precioPromedio) + "\n";
+        reporte += "Precio menor: S/. " + precioMenor + "\n";
+        reporte += "Precio mayor: S/. " + precioMayor + "\n";
+        reporte += "Ancho promedio: " + String.format("%.2f", anchoPromedio) + " cm\n";
+        reporte += "Ancho menor: " + anchoMenor + " cm\n";
+        reporte += "Ancho mayor: " + anchoMayor + " cm\n";
+        textArea.setText(reporte);
+    }
+
+    // Métodos auxiliares para obtener los valores de Tienda
+    private double obtenerPrecioPorModelo(int indice) {
+        switch (indice) {
+            case 0: return Tienda.precio0;
+            case 1: return Tienda.precio1;
+            case 2: return Tienda.precio2;
+            case 3: return Tienda.precio3;
+            case 4: return Tienda.precio4;
+            default: return 0;
+        }
+    }
+
+    private String obtenerModeloPorIndice(int indice) {
+        switch (indice) {
+            case 0: return Tienda.modelo0;
+            case 1: return Tienda.modelo1;
+            case 2: return Tienda.modelo2;
+            case 3: return Tienda.modelo3;
+            case 4: return Tienda.modelo4;
+            default: return "";
+        }
+    }
+
+    private double obtenerPrecioPromedio() {
+        return (Tienda.precio0 + Tienda.precio1 + Tienda.precio2 + Tienda.precio3 + Tienda.precio4) / 5;
+    }
+
+    private double obtenerPrecioMenor() {
+        return Math.min(Math.min(Math.min(Tienda.precio0, Tienda.precio1), 
+                                 Math.min(Tienda.precio2, Tienda.precio3)), Tienda.precio4);
+    }
+
+    private double obtenerPrecioMayor() {
+        return Math.max(Math.max(Math.max(Tienda.precio0, Tienda.precio1), 
+                                 Math.max(Tienda.precio2, Tienda.precio3)), Tienda.precio4);
+    }
+
+    private double obtenerAnchoPromedio() {
+        return (Tienda.ancho0 + Tienda.ancho1 + Tienda.ancho2 + Tienda.ancho3 + Tienda.ancho4) / 5;
+    }
+
+    private double obtenerAnchoMenor() {
+        return Math.min(Math.min(Math.min(Tienda.ancho0, Tienda.ancho1), 
+                                 Math.min(Tienda.ancho2, Tienda.ancho3)), Tienda.ancho4);
+    }
+
+    private double obtenerAnchoMayor() {
+        return Math.max(Math.max(Math.max(Tienda.ancho0, Tienda.ancho1), 
+                                 Math.max(Tienda.ancho2, Tienda.ancho3)), Tienda.ancho4);
+    }
 }

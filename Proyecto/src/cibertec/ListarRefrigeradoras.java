@@ -47,44 +47,23 @@ public class ListarRefrigeradoras extends JDialog {
 
 	protected void listarRefrigeradoras() {
 		textArea.setText("");
-
 		textArea.append("--> LISTADO DE REFRIGERADORAS <--\n\n");
 
-		textArea.append("Refrigeradora 1:\n");
-		textArea.append("Modelo: " + Tienda.modelo0 + "\n");
-		textArea.append(String.format("Precio: $%.2f\n", Tienda.precio0));
-		textArea.append("Fondo: " + Tienda.fondo0 + " cm\n");
-		textArea.append("Ancho: " + Tienda.ancho0 + " cm\n");
-		textArea.append("Alto: " + Tienda.alto0 + " cm\n\n");
-
-		textArea.append("Refrigeradora 2:\n");
-		textArea.append("Modelo: " + Tienda.modelo1 + "\n");
-		textArea.append(String.format("Precio: $%.2f\n", Tienda.precio1));
-		textArea.append("Fondo: " + Tienda.fondo1 + " cm\n");
-		textArea.append("Ancho: " + Tienda.ancho1 + " cm\n");
-		textArea.append("Alto: " + Tienda.alto1 + " cm\n\n");
-
-		textArea.append("Refrigeradora 3:\n");
-		textArea.append("Modelo: " + Tienda.modelo2 + "\n");
-		textArea.append(String.format("Precio: $%.2f\n", Tienda.precio2));
-		textArea.append("Fondo: " + Tienda.fondo2 + " cm\n");
-		textArea.append("Ancho: " + Tienda.ancho2 + " cm\n");
-		textArea.append("Alto: " + Tienda.alto2 + " cm\n\n");
-
-		textArea.append("Refrigeradora 4:\n");
-		textArea.append("Modelo: " + Tienda.modelo3 + "\n");
-		textArea.append(String.format("Precio: $%.2f\n", Tienda.precio3));
-		textArea.append("Fondo: " + Tienda.fondo3 + " cm\n");
-		textArea.append("Ancho: " + Tienda.ancho3 + " cm\n");
-		textArea.append("Alto: " + Tienda.alto3 + " cm\n\n");
-
-		textArea.append("Refrigeradora 5:\n");
-		textArea.append("Modelo: " + Tienda.modelo4 + "\n");
-		textArea.append(String.format("Precio: $%.2f\n", Tienda.precio4));
-		textArea.append("Fondo: " + Tienda.fondo4 + " cm\n");
-		textArea.append("Ancho: " + Tienda.ancho4 + " cm\n");
-		textArea.append("Alto: " + Tienda.alto4 + " cm\n");
+		agregarRefrigeradora(Tienda.modelo0, Tienda.precio0, Tienda.fondo0, Tienda.ancho0, Tienda.alto0, 1);
+		agregarRefrigeradora(Tienda.modelo1, Tienda.precio1, Tienda.fondo1, Tienda.ancho1, Tienda.alto1, 2);
+		agregarRefrigeradora(Tienda.modelo2, Tienda.precio2, Tienda.fondo2, Tienda.ancho2, Tienda.alto2, 3);
+		agregarRefrigeradora(Tienda.modelo3, Tienda.precio3, Tienda.fondo3, Tienda.ancho3, Tienda.alto3, 4);
+		agregarRefrigeradora(Tienda.modelo4, Tienda.precio4, Tienda.fondo4, Tienda.ancho4, Tienda.alto4, 5);
 
 		textArea.setCaretPosition(0);
+	}
+	
+	private void agregarRefrigeradora(String modelo, double precio, double fondo, double ancho, double alto, int numero) {
+		textArea.append("Refrigeradora " + numero + ":\n");
+		textArea.append("Modelo: " + modelo + "\n");
+		textArea.append(String.format("Precio: $%.2f\n", precio));
+		textArea.append("Fondo: " + fondo + " cm\n");
+		textArea.append("Ancho: " + ancho + " cm\n");
+		textArea.append("Alto: " + alto + " cm\n\n");
 	}
 }

@@ -104,35 +104,27 @@ public class ConsultarRefrigeradora extends JDialog {
 	private void mostrarDatos(int index) {
 		switch (index) {
 			case 0:
-				txtPrecio.setText(String.valueOf(Tienda.precio0));
-				txtAncho.setText(String.valueOf(Tienda.ancho0));
-				txtAlto.setText(String.valueOf(Tienda.alto0));
-				txtFondo.setText(String.valueOf(Tienda.fondo0));
+				llenarCampos(Tienda.precio0, Tienda.ancho0, Tienda.alto0, Tienda.fondo0);
 				break;
 			case 1:
-				txtPrecio.setText(String.valueOf(Tienda.precio1));
-				txtAncho.setText(String.valueOf(Tienda.ancho1));
-				txtAlto.setText(String.valueOf(Tienda.alto1));
-				txtFondo.setText(String.valueOf(Tienda.fondo1));
+				llenarCampos(Tienda.precio1, Tienda.ancho1, Tienda.alto1, Tienda.fondo1);
 				break;
 			case 2:
-				txtPrecio.setText(String.valueOf(Tienda.precio2));
-				txtAncho.setText(String.valueOf(Tienda.ancho2));
-				txtAlto.setText(String.valueOf(Tienda.alto2));
-				txtFondo.setText(String.valueOf(Tienda.fondo2));
+				llenarCampos(Tienda.precio2, Tienda.ancho2, Tienda.alto2, Tienda.fondo2);
 				break;
 			case 3:
-				txtPrecio.setText(String.valueOf(Tienda.precio3));
-				txtAncho.setText(String.valueOf(Tienda.ancho3));
-				txtAlto.setText(String.valueOf(Tienda.alto3));
-				txtFondo.setText(String.valueOf(Tienda.fondo3));
+				llenarCampos(Tienda.precio3, Tienda.ancho3, Tienda.alto3, Tienda.fondo3);
 				break;
 			case 4:
-				txtPrecio.setText(String.valueOf(Tienda.precio4));
-				txtAncho.setText(String.valueOf(Tienda.ancho4));
-				txtAlto.setText(String.valueOf(Tienda.alto4));
-				txtFondo.setText(String.valueOf(Tienda.fondo4));
+				llenarCampos(Tienda.precio4, Tienda.ancho4, Tienda.alto4, Tienda.fondo4);
 				break;
 		}
+	}
+	
+	private void llenarCampos(double precio, double ancho, double alto, double fondo) {
+		txtPrecio.setText(String.valueOf(precio));
+		txtAncho.setText(String.valueOf(ancho));
+		txtAlto.setText(String.valueOf(alto));
+		txtFondo.setText(String.valueOf(fondo));
 	}
 }

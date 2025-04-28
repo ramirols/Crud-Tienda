@@ -1,114 +1,196 @@
 package cibertec;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.event.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
 
-public class Vender extends JFrame implements ActionListener {
 
+public class Vender extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JComboBox comboBox;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JLabel lblModelo;
+	private JLabel lblPrecio;
+	private JLabel lblCantidad;
+	private JComboBox<String> comboBox;
+	private JTextField txtPrecio;
+	private JTextField txtCantidad;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
 	private JButton btnVender;
 	private JButton btnCerrar;
 
-	/**
-	 * Launch the application.
-	 */
+	private String[] modelos = {
+		Tienda.modelo0,
+		Tienda.modelo1,
+		Tienda.modelo2,
+		Tienda.modelo3,
+		Tienda.modelo4
+	};
+
+	private double[] precios = {
+		Tienda.precio0,
+		Tienda.precio1,
+		Tienda.precio2,
+		Tienda.precio3,
+		Tienda.precio4
+	};
+
+	private int contadorVentas = 0;
+	private double importeTotalAcumulado = 0;
+
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Vender frame = new Vender();
-					frame.setVisible(true);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				Vender frame = new Vender();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Vender() {
 		setTitle("Vender");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 546, 399);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		lblNewLabel = new JLabel("Modelo");
-		lblNewLabel.setBounds(10, 11, 59, 14);
-		contentPane.add(lblNewLabel);
-		
-		lblNewLabel_1 = new JLabel("Precio (S/)");
-		lblNewLabel_1.setBounds(10, 47, 59, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		lblNewLabel_2 = new JLabel("Cantidad");
-		lblNewLabel_2.setBounds(10, 90, 59, 14);
-		contentPane.add(lblNewLabel_2);
-		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Prueba"}));
-		comboBox.setBounds(96, 7, 191, 18);
+
+		lblModelo = new JLabel("Modelo");
+		lblModelo.setBounds(10, 11, 59, 14);
+		contentPane.add(lblModelo);
+
+		lblPrecio = new JLabel("Precio (S/)");
+		lblPrecio.setBounds(10, 47, 59, 14);
+		contentPane.add(lblPrecio);
+
+		lblCantidad = new JLabel("Cantidad");
+		lblCantidad.setBounds(10, 90, 59, 14);
+		contentPane.add(lblCantidad);
+
+		comboBox = new JComboBox<>();
+		comboBox.setModel(new DefaultComboBoxModel<>(modelos));
+		comboBox.setBounds(96, 7, 191, 22);
 		contentPane.add(comboBox);
-		
-		textField = new JTextField();
-		textField.setBounds(96, 44, 191, 17);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(96, 87, 191, 17);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
+
+		txtPrecio = new JTextField();
+		txtPrecio.setEditable(false);
+		txtPrecio.setBounds(96, 44, 191, 20);
+		contentPane.add(txtPrecio);
+		txtPrecio.setColumns(10);
+
+		txtCantidad = new JTextField();
+		txtCantidad.setBounds(96, 87, 191, 20);
+		contentPane.add(txtCantidad);
+		txtCantidad.setColumns(10);
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 138, 514, 200);
 		contentPane.add(scrollPane);
-		
+
 		textArea = new JTextArea();
+		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
-		
+
 		btnVender = new JButton("Vender");
-		btnVender.setBounds(389, 7, 117, 30);
+		btnVender.setBounds(407, 24, 117, 30);
 		contentPane.add(btnVender);
-		
+
 		btnCerrar = new JButton("Cerrar");
-		btnCerrar.addActionListener(this);
-		btnCerrar.setBounds(389, 59, 117, 30);
+		btnCerrar.setBounds(407, 65, 117, 30);
 		contentPane.add(btnCerrar);
+
+		// Listeners
+		comboBox.addActionListener(this);
+		btnVender.addActionListener(this);
+		btnCerrar.addActionListener(this);
+
+		// Mostrar precio inicial
+		mostrarPrecio(0);
 	}
+
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCerrar) {
-			actionPerformedBtnCerrar(e);
+		if (e.getSource() == comboBox) {
+			mostrarPrecio(comboBox.getSelectedIndex());
+		} else if (e.getSource() == btnVender) {
+			vender();
+		} else if (e.getSource() == btnCerrar) {
+			dispose();
 		}
 	}
-	protected void actionPerformedBtnCerrar(ActionEvent e) {
-		dispose();
+
+	private void mostrarPrecio(int index) {
+		txtPrecio.setText(String.format("%.2f", precios[index]));
+	}
+
+	private void vender() {
+		int modeloIndex = comboBox.getSelectedIndex();
+		String modelo = modelos[modeloIndex];
+		double precio = precios[modeloIndex];
+		int cantidad;
+
+		try {
+			cantidad = Integer.parseInt(txtCantidad.getText());
+			if (cantidad <= 0) throw new NumberFormatException();
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		// Cálculos
+		double importeCompra = precio * cantidad;
+		double porcentajeDescuento = obtenerPorcentajeDescuento(cantidad);
+		double importeDescuento = importeCompra * porcentajeDescuento / 100;
+		double importePagar = importeCompra - importeDescuento;
+		String obsequio = obtenerObsequio(cantidad);
+
+		// Mostrar boleta
+		textArea.setText("");
+		textArea.append("== BOLETA DE VENTA ==\n\n");
+		textArea.append("Modelo: " + modelo + "\n");
+		textArea.append(String.format("Precio unitario: S/ %.2f\n", precio));
+		textArea.append("Cantidad: " + cantidad + "\n");
+		textArea.append(String.format("Importe compra: S/ %.2f\n", importeCompra));
+		textArea.append(String.format("Importe descuento: S/ %.2f\n", importeDescuento));
+		textArea.append(String.format("Importe a pagar: S/ %.2f\n", importePagar));
+		textArea.append("Obsequio: " + obsequio + "\n");
+
+		// Actualizar contador e importes
+		contadorVentas++;
+		importeTotalAcumulado += importePagar;
+
+		// Cada 5 ventas mostrar alerta
+		if (contadorVentas % 5 == 0) {
+			double porcentajeCuota = importeTotalAcumulado / Tienda.cuotaDiaria * 100;
+			JOptionPane.showMessageDialog(this,
+				"Venta número: " + contadorVentas +
+				"\nImporte total acumulado: S/ " + String.format("%.2f", importeTotalAcumulado) +
+				"\nPorcentaje de cuota diaria alcanzado: " + String.format("%.2f", porcentajeCuota) + "%",
+				"Alerta de Ventas",
+				JOptionPane.INFORMATION_MESSAGE
+			);
+		}
+	}
+
+	private double obtenerPorcentajeDescuento(int cantidad) {
+		if (cantidad >= 1 && cantidad <= 5)
+			return Tienda.porcentaje1;
+		else if (cantidad >= 6 && cantidad <= 10)
+			return Tienda.porcentaje2;
+		else if (cantidad >= 11 && cantidad <= 15)
+			return Tienda.porcentaje3;
+		else
+			return Tienda.porcentaje4;
+	}
+
+	private String obtenerObsequio(int cantidad) {
+		if (cantidad == 1)
+			return Tienda.obsequio1;
+		else if (cantidad >= 2 && cantidad <= 5)
+			return Tienda.obsequio2;
+		else
+			return Tienda.obsequio3;
 	}
 }

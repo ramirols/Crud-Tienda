@@ -1,121 +1,140 @@
 package cibertec;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JDialog;
+import javax.swing.border.EmptyBorder;
 
-public class ConfigurarDescuentos extends JFrame {
+public class ConfigurarDescuentos extends JDialog {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
-	private JButton btnNewButton;
-	private JButton btnVender;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JLabel lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3;
+    private JTextField textField, textField_1, textField_2, textField_3;
+    private JButton btnAceptar, btnCancelar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConfigurarDescuentos frame = new ConfigurarDescuentos();
-					frame.setVisible(true);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public ConfigurarDescuentos() {
+        // Configuración básica del JDialog
+        setTitle("Configurar porcentajes de descuento");
+        setBounds(100, 100, 450, 168);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-	/**
-	 * Create the frame.
-	 */
-	public ConfigurarDescuentos() {
-		setTitle("Configurar porcentajes de descuento");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 168);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        // Inicialización de etiquetas y campos de texto
+        initializeLabelsAndFields();
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		lblNewLabel = new JLabel("1 a 5 unidades");
-		lblNewLabel.setBounds(10, 11, 106, 14);
-		contentPane.add(lblNewLabel);
-		
-		lblNewLabel_1 = new JLabel("6 a 10 unidades");
-		lblNewLabel_1.setBounds(10, 39, 106, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		lblNewLabel_2 = new JLabel("11 a 15 unidades");
-		lblNewLabel_2.setBounds(10, 70, 106, 14);
-		contentPane.add(lblNewLabel_2);
-		
-		lblNewLabel_3 = new JLabel("M\u00E1s de 15 unidades");
-		lblNewLabel_3.setBounds(10, 102, 106, 14);
-		contentPane.add(lblNewLabel_3);
-		
-		textField = new JTextField();
-		textField.setBounds(140, 8, 120, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(140, 36, 120, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(140, 67, 120, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(140, 99, 120, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
-		
-		lblNewLabel_4 = new JLabel("%");
-		lblNewLabel_4.setBounds(270, 11, 24, 14);
-		contentPane.add(lblNewLabel_4);
-		
-		lblNewLabel_5 = new JLabel("%");
-		lblNewLabel_5.setBounds(270, 39, 24, 14);
-		contentPane.add(lblNewLabel_5);
-		
-		lblNewLabel_6 = new JLabel("%");
-		lblNewLabel_6.setBounds(270, 70, 24, 14);
-		contentPane.add(lblNewLabel_6);
-		
-		lblNewLabel_7 = new JLabel("%");
-		lblNewLabel_7.setBounds(270, 102, 24, 14);
-		contentPane.add(lblNewLabel_7);
-		
-		btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBounds(304, 11, 106, 29);
-		contentPane.add(btnNewButton);
-		
-		btnVender = new JButton("Vender");
-		btnVender.setBounds(304, 51, 106, 29);
-		contentPane.add(btnVender);
-	}
+        // Inicialización de botones
+        initializeButtons();
+
+        // Cargar los valores actuales en los campos de texto
+        cargarValoresDescuento();
+
+        // Acción para el botón Aceptar
+        btnAceptar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Actualizar los porcentajes de descuento
+                if (actualizarDescuentos()) {
+                    dispose(); // Cerrar el JDialog
+                }
+            }
+        });
+
+        // Acción para el botón Cancelar
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Cerrar el JDialog sin hacer cambios
+            }
+        });
+    }
+
+    // Inicializar las etiquetas y los campos de texto
+    private void initializeLabelsAndFields() {
+        lblNewLabel = new JLabel("1 a 5 unidades");
+        lblNewLabel.setBounds(10, 11, 106, 14);
+        contentPane.add(lblNewLabel);
+
+        lblNewLabel_1 = new JLabel("6 a 10 unidades");
+        lblNewLabel_1.setBounds(10, 39, 106, 14);
+        contentPane.add(lblNewLabel_1);
+
+        lblNewLabel_2 = new JLabel("11 a 15 unidades");
+        lblNewLabel_2.setBounds(10, 70, 106, 14);
+        contentPane.add(lblNewLabel_2);
+
+        lblNewLabel_3 = new JLabel("Más de 15 unidades");
+        lblNewLabel_3.setBounds(10, 102, 106, 14);
+        contentPane.add(lblNewLabel_3);
+
+        // Campos de texto para los porcentajes
+        textField = new JTextField();
+        textField.setBounds(140, 8, 120, 20);
+        contentPane.add(textField);
+        textField.setColumns(10);
+
+        textField_1 = new JTextField();
+        textField_1.setBounds(140, 36, 120, 20);
+        contentPane.add(textField_1);
+        textField_1.setColumns(10);
+
+        textField_2 = new JTextField();
+        textField_2.setBounds(140, 67, 120, 20);
+        contentPane.add(textField_2);
+        textField_2.setColumns(10);
+
+        textField_3 = new JTextField();
+        textField_3.setBounds(140, 99, 120, 20);
+        contentPane.add(textField_3);
+        textField_3.setColumns(10);
+    }
+
+    // Inicializar los botones
+    private void initializeButtons() {
+        // Botón Aceptar
+        btnAceptar = new JButton("Aceptar");
+        btnAceptar.setBounds(304, 11, 106, 29);
+        contentPane.add(btnAceptar);
+
+        // Botón Cancelar
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(304, 51, 106, 29);
+        contentPane.add(btnCancelar);
+    }
+
+    // Cargar los valores actuales de descuento en los campos de texto
+    private void cargarValoresDescuento() {
+        textField.setText(String.valueOf(Tienda.porcentaje1));
+        textField_1.setText(String.valueOf(Tienda.porcentaje2));
+        textField_2.setText(String.valueOf(Tienda.porcentaje3));
+        textField_3.setText(String.valueOf(Tienda.porcentaje4));
+    }
+
+    // Validar y actualizar los descuentos si los valores son válidos
+    private boolean actualizarDescuentos() {
+        try {
+            Tienda.porcentaje1 = Double.parseDouble(textField.getText());
+            Tienda.porcentaje2 = Double.parseDouble(textField_1.getText());
+            Tienda.porcentaje3 = Double.parseDouble(textField_2.getText());
+            Tienda.porcentaje4 = Double.parseDouble(textField_3.getText());
+        } catch (NumberFormatException ex) {
+            // Mostrar un mensaje de error si los valores no son válidos
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false; // No actualizar los valores
+        }
+        return true; // Los valores fueron actualizados correctamente
+    }
+
+    // Método para mostrar el JDialog
+    public static void showDialog() {
+        ConfigurarDescuentos dialog = new ConfigurarDescuentos();
+        dialog.setModal(true);  // Hace que el JDialog sea modal
+        dialog.setVisible(true); // Muestra el JDialog
+    }
 }

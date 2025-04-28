@@ -102,48 +102,7 @@ public class ModificarRefrigeradora extends JDialog {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = comboBox.getSelectedIndex();
-				try {
-					double nuevoPrecio = Double.parseDouble(txtPrecio.getText());
-					int nuevoAncho = (int) Double.parseDouble(txtAncho.getText());
-					int nuevoAlto = (int) Double.parseDouble(txtAlto.getText());
-					int nuevoFondo = (int) Double.parseDouble(txtFondo.getText());
-
-					switch (index) {
-						case 0:
-							Tienda.precio0 = nuevoPrecio;
-							Tienda.ancho0 = nuevoAncho;
-							Tienda.alto0 = nuevoAlto;
-							Tienda.fondo0 = nuevoFondo;
-							break;
-						case 1:
-							Tienda.precio1 = nuevoPrecio;
-							Tienda.ancho1 = nuevoAncho;
-							Tienda.alto1 = nuevoAlto;
-							Tienda.fondo1 = nuevoFondo;
-							break;
-						case 2:
-							Tienda.precio2 = nuevoPrecio;
-							Tienda.ancho2 = nuevoAncho;
-							Tienda.alto2 = nuevoAlto;
-							Tienda.fondo2 = nuevoFondo;
-							break;
-						case 3:
-							Tienda.precio3 = nuevoPrecio;
-							Tienda.ancho3 = nuevoAncho;
-							Tienda.alto3 = nuevoAlto;
-							Tienda.fondo3 = nuevoFondo;
-							break;
-						case 4:
-							Tienda.precio4 = nuevoPrecio;
-							Tienda.ancho4 = nuevoAncho;
-							Tienda.alto4 = nuevoAlto;
-							Tienda.fondo4 = nuevoFondo;
-							break;
-					}
-					dispose();
-				} catch (NumberFormatException ex) {
-					System.out.println("Error en formato numérico: " + ex.getMessage());
-				}
+				guardarDatos(index);
 			}
 		});
 	}
@@ -182,4 +141,50 @@ public class ModificarRefrigeradora extends JDialog {
 				break;
 		}
 	}
+	
+	private void guardarDatos(int index) {
+		try {
+			double nuevoPrecio = Double.parseDouble(txtPrecio.getText());
+			int nuevoAncho = (int) Double.parseDouble(txtAncho.getText());
+			int nuevoAlto = (int) Double.parseDouble(txtAlto.getText());
+			int nuevoFondo = (int) Double.parseDouble(txtFondo.getText());
+
+			switch (index) {
+				case 0:
+					Tienda.precio0 = nuevoPrecio;
+					Tienda.ancho0 = nuevoAncho;
+					Tienda.alto0 = nuevoAlto;
+					Tienda.fondo0 = nuevoFondo;
+					break;
+				case 1:
+					Tienda.precio1 = nuevoPrecio;
+					Tienda.ancho1 = nuevoAncho;
+					Tienda.alto1 = nuevoAlto;
+					Tienda.fondo1 = nuevoFondo;
+					break;
+				case 2:
+					Tienda.precio2 = nuevoPrecio;
+					Tienda.ancho2 = nuevoAncho;
+					Tienda.alto2 = nuevoAlto;
+					Tienda.fondo2 = nuevoFondo;
+					break;
+				case 3:
+					Tienda.precio3 = nuevoPrecio;
+					Tienda.ancho3 = nuevoAncho;
+					Tienda.alto3 = nuevoAlto;
+					Tienda.fondo3 = nuevoFondo;
+					break;
+				case 4:
+					Tienda.precio4 = nuevoPrecio;
+					Tienda.ancho4 = nuevoAncho;
+					Tienda.alto4 = nuevoAlto;
+					Tienda.fondo4 = nuevoFondo;
+					break;
+			}
+			dispose();
+		} catch (NumberFormatException ex) {
+			System.out.println("Error en formato numérico: " + ex.getMessage());
+		}
+	}
 }
+

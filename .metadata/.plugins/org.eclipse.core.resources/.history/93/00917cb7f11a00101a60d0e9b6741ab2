@@ -1,6 +1,0 @@
-package cibertec;
-import javax.swing.JDialog;
-
-public class ConsultarRefrigeradora extends JDialog {
-
-}

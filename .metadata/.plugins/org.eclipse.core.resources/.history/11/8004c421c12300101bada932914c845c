@@ -1,0 +1,142 @@
+package cibertec;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.border.EmptyBorder;
+
+public class GenerarReportes extends JDialog implements ActionListener {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JLabel lblNewLabel;
+    private JComboBox<String> comboBox;
+    private JScrollPane scrollPane;
+    private JTextArea textArea;
+    private JButton btnCerrar;
+
+    // Variables de apoyo
+    private String[] tiposReportes = {
+        "Listado de Refrigeradoras",
+        "Listado de Precios",
+        "Porcentajes de Descuento",
+        "Obsequios Disponibles"
+    };
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    GenerarReportes frame = new GenerarReportes();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public GenerarReportes() {
+        setTitle("Generar reportes");
+        setBounds(100, 100, 550, 341);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        lblNewLabel = new JLabel("Tipo de reporte");
+        lblNewLabel.setBounds(10, 11, 103, 20);
+        contentPane.add(lblNewLabel);
+
+        comboBox = new JComboBox<>(tiposReportes);
+        comboBox.setBounds(118, 10, 274, 21);
+        comboBox.addActionListener(this);
+        contentPane.add(comboBox);
+
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 51, 514, 228);
+        contentPane.add(scrollPane);
+
+        textArea = new JTextArea();
+        scrollPane.setViewportView(textArea);
+
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setBounds(403, 10, 121, 30);
+        btnCerrar.addActionListener(this);
+        contentPane.add(btnCerrar);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnCerrar) {
+            dispose();
+        } else if (e.getSource() == comboBox) {
+            generarReporte();
+        }
+    }
+
+    // Método para generar reportes
+    private void generarReporte() {
+        int opcion = comboBox.getSelectedIndex();
+        switch (opcion) {
+            case 0:
+                mostrarListadoRefrigeradoras();
+                break;
+            case 1:
+                mostrarListadoPrecios();
+                break;
+            case 2:
+                mostrarPorcentajesDescuento();
+                break;
+            case 3:
+                mostrarObsequios();
+                break;
+        }
+    }
+
+    private void mostrarListadoRefrigeradoras() {
+        String reporte = "";
+        reporte += "MODELOS DISPONIBLES:\n";
+        reporte += "- " + Tienda.modelo0 + "\n";
+        reporte += "- " + Tienda.modelo1 + "\n";
+        reporte += "- " + Tienda.modelo2 + "\n";
+        reporte += "- " + Tienda.modelo3 + "\n";
+        reporte += "- " + Tienda.modelo4 + "\n";
+        textArea.setText(reporte);
+    }
+
+    private void mostrarListadoPrecios() {
+        String reporte = "";
+        reporte += "PRECIOS DE LAS REFRIGERADORAS:\n";
+        reporte += Tienda.modelo0 + ": S/ " + Tienda.precio0 + "\n";
+        reporte += Tienda.modelo1 + ": S/ " + Tienda.precio1 + "\n";
+        reporte += Tienda.modelo2 + ": S/ " + Tienda.precio2 + "\n";
+        reporte += Tienda.modelo3 + ": S/ " + Tienda.precio3 + "\n";
+        reporte += Tienda.modelo4 + ": S/ " + Tienda.precio4 + "\n";
+        textArea.setText(reporte);
+    }
+
+    private void mostrarPorcentajesDescuento() {
+        String reporte = "";
+        reporte += "PORCENTAJES DE DESCUENTO:\n";
+        reporte += "1 a 5 unidades: " + Tienda.porcentaje1 + "%\n";
+        reporte += "6 a 10 unidades: " + Tienda.porcentaje2 + "%\n";
+        reporte += "11 a 15 unidades: " + Tienda.porcentaje3 + "%\n";
+        reporte += "Más de 15 unidades: " + Tienda.porcentaje4 + "%\n";
+        textArea.setText(reporte);
+    }
+
+    private void mostrarObsequios() {
+        String reporte = "";
+        reporte += "OBSEQUIOS DISPONIBLES:\n";
+        reporte += "1 unidad: " + Tienda.obsequio1 + "\n";
+        reporte += "2 a 5 unidades: " + Tienda.obsequio2 + "\n";
+        reporte += "Más de 5 unidades: " + Tienda.obsequio3 + "\n";
+        textArea.setText(reporte);
+    }
+}

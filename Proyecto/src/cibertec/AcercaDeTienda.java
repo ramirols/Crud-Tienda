@@ -1,106 +1,109 @@
 package cibertec;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JSeparator;
-import java.awt.Color;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.SwingConstants;
 
-public class AcercaDeTienda extends JFrame implements ActionListener {
+public class AcercaDeTienda extends JDialog implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JLabel lblNewLabel;
-	private JSeparator separator;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
-	private JButton btnCerrar;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JLabel lblTitle;
+    private JSeparator separator;
+    private JLabel lblAuthors;
+    private JLabel lblAuthor1;
+    private JLabel lblAuthor2;
+    private JLabel lblAuthor3;
+    private JLabel lblAuthor4;
+    private JButton btnCerrar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AcercaDeTienda frame = new AcercaDeTienda();
-					frame.setVisible(true);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    // Constructor
+    public AcercaDeTienda() {
+        // Configuración básica del JDialog
+        setTitle("Acerca de Tienda");
+        setBounds(100, 100, 444, 353);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-	/**
-	 * Create the frame.
-	 */
-	public AcercaDeTienda() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 444, 353);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        // Inicializar componentes
+        initializeComponents();
+    }
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		lblNewLabel = new JLabel("TIENDA 1.0");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel.setBounds(123, 11, 195, 49);
-		contentPane.add(lblNewLabel);
-		
-		separator = new JSeparator();
-		separator.setForeground(Color.DARK_GRAY);
-		separator.setBounds(22, 58, 382, 2);
-		contentPane.add(separator);
-		
-		lblNewLabel_1 = new JLabel("Autores");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel_1.setBounds(163, 71, 93, 42);
-		contentPane.add(lblNewLabel_1);
-		
-		lblNewLabel_2 = new JLabel("Andy Monkey");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewLabel_2.setBounds(136, 124, 155, 19);
-		contentPane.add(lblNewLabel_2);
-		
-		lblNewLabel_3 = new JLabel("Jhon Rosales");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewLabel_3.setBounds(146, 152, 128, 14);
-		contentPane.add(lblNewLabel_3);
-		
-		lblNewLabel_4 = new JLabel("Diego Rojas");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewLabel_4.setBounds(156, 177, 104, 19);
-		contentPane.add(lblNewLabel_4);
-		
-		lblNewLabel_5 = new JLabel("Ramiro Sanchez");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewLabel_5.setBounds(136, 207, 155, 14);
-		contentPane.add(lblNewLabel_5);
-		
-		btnCerrar = new JButton("Cerrar");
-		btnCerrar.addActionListener(this);
-		btnCerrar.setBounds(146, 258, 118, 29);
-		contentPane.add(btnCerrar);
-	}
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCerrar) {
-			actionPerformedBtnCerrar(e);
-		}
-	}
-	protected void actionPerformedBtnCerrar(ActionEvent e) {
-		dispose();
-	}
+    // Método para inicializar todos los componentes
+    private void initializeComponents() {
+        lblTitle = new JLabel("TIENDA 1.0");
+        lblTitle.setFont(new Font("Tahoma", Font.BOLD, 30));
+        lblTitle.setBounds(123, 11, 195, 49);
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el título
+        contentPane.add(lblTitle);
+
+        separator = new JSeparator();
+        separator.setForeground(Color.DARK_GRAY);
+        separator.setBounds(22, 58, 382, 2);
+        contentPane.add(separator);
+
+        lblAuthors = new JLabel("Autores");
+        lblAuthors.setFont(new Font("Tahoma", Font.BOLD, 24));
+        lblAuthors.setBounds(163, 71, 93, 42);
+        lblAuthors.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar "Autores"
+        contentPane.add(lblAuthors);
+
+        lblAuthor1 = new JLabel("Andy Monkey");
+        lblAuthor1.setFont(new Font("Tahoma", Font.BOLD, 17));
+        lblAuthor1.setBounds(136, 124, 155, 19);
+        lblAuthor1.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        contentPane.add(lblAuthor1);
+
+        lblAuthor2 = new JLabel("Jhon Rosales");
+        lblAuthor2.setFont(new Font("Tahoma", Font.BOLD, 17));
+        lblAuthor2.setBounds(146, 152, 128, 14);
+        lblAuthor2.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        contentPane.add(lblAuthor2);
+
+        lblAuthor3 = new JLabel("Diego Rojas");
+        lblAuthor3.setFont(new Font("Tahoma", Font.BOLD, 17));
+        lblAuthor3.setBounds(156, 177, 104, 19);
+        lblAuthor3.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        contentPane.add(lblAuthor3);
+
+        lblAuthor4 = new JLabel("Ramiro Sanchez");
+        lblAuthor4.setFont(new Font("Tahoma", Font.BOLD, 17));
+        lblAuthor4.setBounds(136, 207, 155, 14);
+        lblAuthor4.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        contentPane.add(lblAuthor4);
+
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setBounds(146, 258, 118, 29);
+        btnCerrar.addActionListener(this);
+        contentPane.add(btnCerrar);
+    }
+
+    // Acción del botón Cerrar
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnCerrar) {
+            closeDialog();
+        }
+    }
+
+    // Método para cerrar el JDialog
+    private void closeDialog() {
+        dispose();
+    }
+
+    // Método estático para mostrar el diálogo
+    public static void showDialog() {
+        AcercaDeTienda dialog = new AcercaDeTienda();
+        dialog.setModal(true); // Hace que el JDialog sea modal
+        dialog.setVisible(true); // Muestra el JDialog
+    }
 }
