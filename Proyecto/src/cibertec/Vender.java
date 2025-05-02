@@ -28,13 +28,16 @@ public class Vender extends JDialog implements ActionListener {
 		Tienda.modelo4
 	};
 
-	private double[] precios = {
-		Tienda.precio0,
-		Tienda.precio1,
-		Tienda.precio2,
-		Tienda.precio3,
-		Tienda.precio4
-	};
+	private double obtenerPrecioActual(int index) {
+		switch(index) {
+			case 0: return Tienda.precio0;
+			case 1: return Tienda.precio1;
+			case 2: return Tienda.precio2;
+			case 3: return Tienda.precio3;
+			case 4: return Tienda.precio4;
+			default: return 0;
+		}
+	}
 
 	private int contadorVentas = 0;
 	private double importeTotalAcumulado = 0;
@@ -121,13 +124,13 @@ public class Vender extends JDialog implements ActionListener {
 	}
 
 	private void mostrarPrecio(int index) {
-		txtPrecio.setText(String.format("%.2f", precios[index]));
+		txtPrecio.setText(String.format("%.2f", obtenerPrecioActual(index)));
 	}
 
 	private void vender() {
 		int modeloIndex = comboBox.getSelectedIndex();
 		String modelo = modelos[modeloIndex];
-		double precio = precios[modeloIndex];
+		double precio = obtenerPrecioActual(modeloIndex);
 		int cantidad;
 
 		try {
@@ -145,7 +148,7 @@ public class Vender extends JDialog implements ActionListener {
 		double importePagar = importeCompra - importeDescuento;
 		String obsequio = obtenerObsequio(cantidad);
 
-		// mostrar la boleta acorde a los datos solicitados
+		// mostrar la boleta de acuerdo a los datos solicitados
 		textArea.setText("");
 		textArea.append("== BOLETA DE VENTA ==\n\n");
 		textArea.append("Modelo: " + modelo + "\n");

@@ -17,6 +17,7 @@ public class Tienda extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
+	
 	// Datos mínimos de la primera refrigeradora
 	public static String modelo0 = "LG LTCS20020W";
 	public static double precio0 = 949.0;
@@ -178,6 +179,7 @@ public class Tienda extends JFrame implements ActionListener {
 		btnMenuAcercaDeTienda = new JMenuItem("Acerca de tienda");
 		btnMenuAcercaDeTienda.addActionListener(this);
 		mnNewMenu_4.add(btnMenuAcercaDeTienda);
+	
 	}
 
 	public void actionPerformed(ActionEvent e) {

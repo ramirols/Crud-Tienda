@@ -104,7 +104,7 @@ public class ConfigurarObsequios extends JDialog {
         } catch (Exception ex) {
             // si los mensajes no son válidos, mostrar
             JOptionPane.showMessageDialog(null, "Por favor, ingrese valores válidos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // no actualizar los valores
+            return false; // no actualiza los valores
         }
         return true;
     }

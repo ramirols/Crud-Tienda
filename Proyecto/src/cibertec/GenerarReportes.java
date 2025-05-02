@@ -22,8 +22,9 @@ public class GenerarReportes extends JDialog implements ActionListener {
         "Promedios, Menores y Mayores"
     };
 
-    private int[] ventasPorModelo = {0, 5, 2, 3, 5};
-    private int[] unidadesVendidas = {14, 21, 10, 2, 3};
+ // Variables para cantidad de ventas y unidades por modelo
+    public static int[] cantidadVentas = new int[5];
+    public static int[] unidadesVendidas = new int[5];
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -101,7 +102,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
             double importeTotal = unidadesVendidas[i] * obtenerPrecioPorModelo(i);
             double aporteCuotaDiaria = (importeTotal / Tienda.cuotaDiaria) * 100;
             reporte += "Modelo: " + obtenerModeloPorIndice(i) + "\n";
-            reporte += "Cantidad de ventas: " + ventasPorModelo[i] + "\n";
+            reporte += "Cantidad de ventas: " + cantidadVentas[i] + "\n";
             reporte += "Cantidad de unidades vendidas: " + unidadesVendidas[i] + "\n";
             reporte += "Importe total vendido: S/. " + String.format("%.2f", importeTotal) + "\n";
             reporte += "Aporte a la cuota diaria: " + String.format("%.2f", aporteCuotaDiaria) + "%\n\n";
