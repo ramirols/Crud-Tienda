@@ -15,7 +15,6 @@ public class GenerarReportes extends JDialog implements ActionListener {
     private JTextArea textArea;
     private JButton btnCerrar;
 
-    // Variables de apoyo
     private String[] tiposReportes = {
         "Ventas por Modelo",
         "Ventas en Relación a la Venta Óptima",
@@ -23,9 +22,8 @@ public class GenerarReportes extends JDialog implements ActionListener {
         "Promedios, Menores y Mayores"
     };
 
-    // Datos de ventas (Ejemplo, puedes usar un arreglo o más variables globales si es necesario)
-    private int[] ventasPorModelo = {2, 2, 2, 2, 2};  // Ejemplo de cantidad de ventas por modelo
-    private int[] unidadesVendidas = {14, 21, 10, 2, 3};  // Ejemplo de unidades vendidas
+    private int[] ventasPorModelo = {0, 5, 2, 3, 5};
+    private int[] unidadesVendidas = {14, 21, 10, 2, 3};
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -96,7 +94,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
         }
     }
 
-    // Método para mostrar las ventas por modelo
+    // método para mostrar las ventas por modelo
     private void mostrarVentasPorModelo() {
         String reporte = "VENTAS POR MODELO\n";
         for (int i = 0; i < 5; i++) {
@@ -111,7 +109,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
         textArea.setText(reporte);
     }
 
-    // Método para mostrar las ventas en relación a la venta óptima
+    // método para mostrar las ventas en relación a la venta óptima
     private void mostrarVentasRelacionVentaOptima() {
         String reporte = "VENTAS EN RELACIÓN A LA VENTA ÓPTIMA\n";
         for (int i = 0; i < 5; i++) {
@@ -127,7 +125,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
         textArea.setText(reporte);
     }
 
-    // Método para mostrar los precios en relación al precio promedio
+    // método para mostrar los precios en relación al precio promedio
     private void mostrarPreciosRelacionPrecioPromedio() {
         double precioPromedio = obtenerPrecioPromedio();
         String reporte = "PRECIOS EN RELACIÓN AL PRECIO PROMEDIO\n";
@@ -143,7 +141,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
         textArea.setText(reporte);
     }
 
-    // Método para mostrar promedios, menores y mayores
+    // método para mostrar promedios, menores y mayores
     private void mostrarPromediosMenoresMayores() {
         double precioPromedio = obtenerPrecioPromedio();
         double precioMenor = obtenerPrecioMenor();
@@ -162,7 +160,6 @@ public class GenerarReportes extends JDialog implements ActionListener {
         textArea.setText(reporte);
     }
 
-    // Métodos auxiliares para obtener los valores de Tienda
     private double obtenerPrecioPorModelo(int indice) {
         switch (indice) {
             case 0: return Tienda.precio0;

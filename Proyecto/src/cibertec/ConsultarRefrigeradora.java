@@ -22,6 +22,7 @@ public class ConsultarRefrigeradora extends JDialog {
 	private JTextField txtFondo;
 	private JButton btnCerrar;
 
+	// traer los modelos para funcionalidad
 	private String[] modelos = {
 		Tienda.modelo0,
 		Tienda.modelo1,
@@ -56,6 +57,7 @@ public class ConsultarRefrigeradora extends JDialog {
 		lblFondo.setBounds(10, 115, 63, 14);
 		getContentPane().add(lblFondo);
 
+		// traer modelos de tienda para el combobox
 		comboBox = new JComboBox<>();
 		comboBox.setModel(new DefaultComboBoxModel<>(modelos));
 		comboBox.setBounds(98, 11, 200, 22);
@@ -101,6 +103,7 @@ public class ConsultarRefrigeradora extends JDialog {
 		});
 	}
 
+	// renderizacion de datos
 	private void mostrarDatos(int index) {
 		switch (index) {
 			case 0:
@@ -121,6 +124,7 @@ public class ConsultarRefrigeradora extends JDialog {
 		}
 	}
 	
+	// rellenado de campos con datos
 	private void llenarCampos(double precio, double ancho, double alto, double fondo) {
 		txtPrecio.setText(String.valueOf(precio));
 		txtAncho.setText(String.valueOf(ancho));

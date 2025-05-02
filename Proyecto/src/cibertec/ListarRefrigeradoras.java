@@ -45,6 +45,7 @@ public class ListarRefrigeradoras extends JDialog {
 		getContentPane().add(btnCerrar);
 	}
 
+	// metodo para listar refrigeradoras
 	protected void listarRefrigeradoras() {
 		textArea.setText("");
 		textArea.append("--> LISTADO DE REFRIGERADORAS <--\n\n");
@@ -58,6 +59,7 @@ public class ListarRefrigeradoras extends JDialog {
 		textArea.setCaretPosition(0);
 	}
 	
+	// metodo para agregar refrigeradoras
 	private void agregarRefrigeradora(String modelo, double precio, double fondo, double ancho, double alto, int numero) {
 		textArea.append("Refrigeradora " + numero + ":\n");
 		textArea.append("Modelo: " + modelo + "\n");

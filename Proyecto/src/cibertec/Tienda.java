@@ -216,6 +216,8 @@ public class Tienda extends JFrame implements ActionListener {
 		}
 		
 	}
+	
+	// renderizacion de los popups / modales para visualización de contenido.
 	protected void actionPerformedMntmNewMenuItem(ActionEvent e) {
 		System.exit(0);
 	}

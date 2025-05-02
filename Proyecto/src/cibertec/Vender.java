@@ -102,12 +102,11 @@ public class Vender extends JDialog implements ActionListener {
 		btnCerrar.setBounds(407, 65, 117, 30);
 		contentPane.add(btnCerrar);
 
-		// Listeners
 		comboBox.addActionListener(this);
 		btnVender.addActionListener(this);
 		btnCerrar.addActionListener(this);
 
-		// Mostrar precio inicial
+		// iniciar con precio inicial
 		mostrarPrecio(0);
 	}
 
@@ -139,14 +138,14 @@ public class Vender extends JDialog implements ActionListener {
 			return;
 		}
 
-		// Cálculos
+		// calculos
 		double importeCompra = precio * cantidad;
 		double porcentajeDescuento = obtenerPorcentajeDescuento(cantidad);
 		double importeDescuento = importeCompra * porcentajeDescuento / 100;
 		double importePagar = importeCompra - importeDescuento;
 		String obsequio = obtenerObsequio(cantidad);
 
-		// Mostrar boleta
+		// mostrar la boleta acorde a los datos solicitados
 		textArea.setText("");
 		textArea.append("== BOLETA DE VENTA ==\n\n");
 		textArea.append("Modelo: " + modelo + "\n");
@@ -157,11 +156,10 @@ public class Vender extends JDialog implements ActionListener {
 		textArea.append(String.format("Importe a pagar: S/ %.2f\n", importePagar));
 		textArea.append("Obsequio: " + obsequio + "\n");
 
-		// Actualizar contador e importes
 		contadorVentas++;
 		importeTotalAcumulado += importePagar;
 
-		// Cada 5 ventas mostrar alerta
+		// cada 5 ventas mostrar alerta
 		if (contadorVentas % 5 == 0) {
 			double porcentajeCuota = importeTotalAcumulado / Tienda.cuotaDiaria * 100;
 			JOptionPane.showMessageDialog(this,

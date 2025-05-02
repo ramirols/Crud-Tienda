@@ -25,9 +25,7 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
     private JLabel lblAuthor4;
     private JButton btnCerrar;
 
-    // Constructor
     public AcercaDeTienda() {
-        // Configuración básica del JDialog
         setTitle("Acerca de Tienda");
         setBounds(100, 100, 444, 353);
         contentPane = new JPanel();
@@ -35,16 +33,15 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Inicializar componentes
         initializeComponents();
     }
 
-    // Método para inicializar todos los componentes
+    // método para inicializar todos los componentes
     private void initializeComponents() {
         lblTitle = new JLabel("TIENDA 1.0");
         lblTitle.setFont(new Font("Tahoma", Font.BOLD, 30));
         lblTitle.setBounds(123, 11, 195, 49);
-        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el título
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblTitle);
 
         separator = new JSeparator();
@@ -55,31 +52,31 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         lblAuthors = new JLabel("Autores");
         lblAuthors.setFont(new Font("Tahoma", Font.BOLD, 24));
         lblAuthors.setBounds(163, 71, 93, 42);
-        lblAuthors.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar "Autores"
+        lblAuthors.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthors);
 
         lblAuthor1 = new JLabel("Andy Monkey");
         lblAuthor1.setFont(new Font("Tahoma", Font.BOLD, 17));
         lblAuthor1.setBounds(136, 124, 155, 19);
-        lblAuthor1.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        lblAuthor1.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthor1);
 
         lblAuthor2 = new JLabel("Jhon Rosales");
         lblAuthor2.setFont(new Font("Tahoma", Font.BOLD, 17));
         lblAuthor2.setBounds(146, 152, 128, 14);
-        lblAuthor2.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        lblAuthor2.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthor2);
 
         lblAuthor3 = new JLabel("Diego Rojas");
         lblAuthor3.setFont(new Font("Tahoma", Font.BOLD, 17));
         lblAuthor3.setBounds(156, 177, 104, 19);
-        lblAuthor3.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        lblAuthor3.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthor3);
 
         lblAuthor4 = new JLabel("Ramiro Sanchez");
         lblAuthor4.setFont(new Font("Tahoma", Font.BOLD, 17));
         lblAuthor4.setBounds(136, 207, 155, 14);
-        lblAuthor4.setHorizontalAlignment(SwingConstants.CENTER);  // Centrar el nombre
+        lblAuthor4.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthor4);
 
         btnCerrar = new JButton("Cerrar");
@@ -88,7 +85,6 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         contentPane.add(btnCerrar);
     }
 
-    // Acción del botón Cerrar
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnCerrar) {
             closeDialog();
@@ -98,12 +94,5 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
     // Método para cerrar el JDialog
     private void closeDialog() {
         dispose();
-    }
-
-    // Método estático para mostrar el diálogo
-    public static void showDialog() {
-        AcercaDeTienda dialog = new AcercaDeTienda();
-        dialog.setModal(true); // Hace que el JDialog sea modal
-        dialog.setVisible(true); // Muestra el JDialog
     }
 }

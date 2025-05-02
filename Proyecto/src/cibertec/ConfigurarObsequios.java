@@ -18,9 +18,7 @@ public class ConfigurarObsequios extends JDialog {
     private JTextField textField, textField_1, textField_2;
     private JButton btnAceptar, btnCancelar;
 
-    // Constructor
     public ConfigurarObsequios() {
-        // Configuración básica del JDialog
         setTitle("Configurar obsequios");
         setBounds(100, 100, 450, 152);
         contentPane = new JPanel();
@@ -28,34 +26,31 @@ public class ConfigurarObsequios extends JDialog {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Inicializar etiquetas y campos de texto
+        // iniciar las etiquetas y campos de texto
         initializeLabelsAndFields();
 
-        // Inicializar botones
+        // inicializar botones
         initializeButtons();
 
-        // Cargar los valores actuales de los obsequios en los campos de texto
+        // cargar los valores actuales de los obsequios en los campos de texto
         cargarValoresObsequios();
 
-        // Acción para el botón Aceptar
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Actualizar los obsequios
+                // actualizar los obsequios
                 if (actualizarObsequios()) {
-                    dispose(); // Cerrar el JDialog
+                    dispose();
                 }
             }
         });
 
-        // Acción para el botón Cancelar
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Cerrar el JDialog sin hacer cambios
+                dispose();
             }
         });
     }
 
-    // Inicializar las etiquetas y los campos de texto
     private void initializeLabelsAndFields() {
         lblNewLabel = new JLabel("1 unidad");
         lblNewLabel.setBounds(10, 11, 109, 22);
@@ -69,7 +64,6 @@ public class ConfigurarObsequios extends JDialog {
         lblAMs.setBounds(10, 77, 109, 22);
         contentPane.add(lblAMs);
 
-        // Campos de texto para los obsequios
         textField = new JTextField();
         textField.setBounds(111, 12, 135, 21);
         contentPane.add(textField);
@@ -86,44 +80,32 @@ public class ConfigurarObsequios extends JDialog {
         contentPane.add(textField_2);
     }
 
-    // Inicializar los botones
     private void initializeButtons() {
-        // Botón Aceptar
         btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(309, 11, 101, 28);
         contentPane.add(btnAceptar);
 
-        // Botón Cancelar
         btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(309, 44, 101, 28);
         contentPane.add(btnCancelar);
     }
 
-    // Cargar los valores actuales de los obsequios en los campos de texto
     private void cargarValoresObsequios() {
         textField.setText(String.valueOf(Tienda.obsequio1));
         textField_1.setText(String.valueOf(Tienda.obsequio2));
         textField_2.setText(String.valueOf(Tienda.obsequio3));
     }
 
-    // Validar y actualizar los obsequios si los valores son válidos
     private boolean actualizarObsequios() {
         try {
             Tienda.obsequio1 = textField.getText();
             Tienda.obsequio2 = textField_1.getText();
             Tienda.obsequio3 = textField_2.getText();
         } catch (Exception ex) {
-            // Mostrar un mensaje de error si los valores no son válidos
+            // si los mensajes no son válidos, mostrar
             JOptionPane.showMessageDialog(null, "Por favor, ingrese valores válidos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // No actualizar los valores
+            return false; // no actualizar los valores
         }
-        return true; // Los valores fueron actualizados correctamente
-    }
-
-    // Método para mostrar el JDialog
-    public static void showDialog() {
-        ConfigurarObsequios dialog = new ConfigurarObsequios();
-        dialog.setModal(true);  // Hace que el JDialog sea modal
-        dialog.setVisible(true); // Muestra el JDialog
+        return true;
     }
 }

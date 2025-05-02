@@ -20,9 +20,7 @@ public class ConfigurarCuotaDiaria extends JDialog {
     private JButton btnAceptar;
     private JButton btnCancelar;
 
-    // Constructor
     public ConfigurarCuotaDiaria() {
-        // Configuración básica del JDialog
         setTitle("Configurar cuota diaria");
         setBounds(100, 100, 480, 112);
         contentPane = new JPanel();
@@ -30,34 +28,32 @@ public class ConfigurarCuotaDiaria extends JDialog {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Inicializar etiquetas y campos de texto
+        // iicializar etiquetas y campos de texto
         initializeLabelsAndFields();
 
-        // Inicializar botones
+        // inicializacion de los botones
         initializeButtons();
 
-        // Cargar el valor actual de cuota diaria en el campo de texto
+        // cargado de el valor actual de cuota diaria en el campo de texto
         cargarValorCuotaDiaria();
 
         // Acción para el botón Aceptar
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Actualizar cuota diaria
+
                 if (actualizarCuotaDiaria()) {
-                    dispose(); // Cerrar el JDialog
+                    dispose();
                 }
             }
         });
 
-        // Acción para el botón Cancelar
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Cerrar el JDialog sin hacer cambios
+                dispose();
             }
         });
     }
 
-    // Inicializar las etiquetas y los campos de texto
     private void initializeLabelsAndFields() {
         lblNewLabel = new JLabel("Cuota diaria esperada (S/.)");
         lblNewLabel.setBounds(10, 11, 146, 14);
@@ -69,40 +65,30 @@ public class ConfigurarCuotaDiaria extends JDialog {
         textField.setColumns(10);
     }
 
-    // Inicializar los botones
     private void initializeButtons() {
-        // Botón Aceptar
         btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(353, 7, 101, 26);
         contentPane.add(btnAceptar);
 
-        // Botón Cancelar
         btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(353, 37, 101, 26);
         contentPane.add(btnCancelar);
     }
 
-    // Cargar el valor actual de cuota diaria en el campo de texto
+    // cargar el valor actual de cuota diaria en el campo de texto
     private void cargarValorCuotaDiaria() {
         textField.setText(String.valueOf(Tienda.cuotaDiaria));
     }
 
-    // Validar y actualizar la cuota diaria si el valor es válido
+    // validar y actualizar la cuota diaria si el valor es válido
     private boolean actualizarCuotaDiaria() {
         try {
             Tienda.cuotaDiaria = Double.parseDouble(textField.getText());
         } catch (NumberFormatException ex) {
-            // Mostrar un mensaje de error si el valor no es válido
+            // mostrar un mensaje de error si el valor no es válido
             JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // No actualizar el valor
+            return false; // no actualizar el valor
         }
-        return true; // El valor fue actualizado correctamente
-    }
-
-    // Método para mostrar el JDialog
-    public static void showDialog() {
-        ConfigurarCuotaDiaria dialog = new ConfigurarCuotaDiaria();
-        dialog.setModal(true);  // Hace que el JDialog sea modal
-        dialog.setVisible(true); // Muestra el JDialog
+        return true;
     }
 }
