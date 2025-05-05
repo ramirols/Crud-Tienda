@@ -55,6 +55,7 @@ public class Vender extends JDialog implements ActionListener {
 
 	public Vender() {
 		setTitle("Vender");
+		setIconImage(new ImageIcon("images/favicon.jpg").getImage());
 		setBounds(100, 100, 546, 399);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -137,7 +138,7 @@ public class Vender extends JDialog implements ActionListener {
 	        cantidad = Integer.parseInt(txtCantidad.getText());
 	        if (cantidad <= 0) throw new NumberFormatException();
 	    } catch (NumberFormatException ex) {
-	        JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+	        JOptionPane.showMessageDialog(this, "Ingrese una cantidad valida. (no puede ser negativa)", "Error", JOptionPane.ERROR_MESSAGE);
 	        return;
 	    }
 

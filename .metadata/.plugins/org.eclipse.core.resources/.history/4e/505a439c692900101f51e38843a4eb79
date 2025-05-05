@@ -1,0 +1,98 @@
+package cibertec;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JDialog;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ConfigurarCuotaDiaria extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JLabel lblNewLabel;
+    private JTextField textField;
+    private JButton btnAceptar;
+    private JButton btnCancelar;
+
+    public ConfigurarCuotaDiaria() {
+        setTitle("Configurar cuota diaria");
+        setBounds(100, 100, 480, 112);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        // iicializar etiquetas y campos de texto
+        initializeLabelsAndFields();
+
+        // inicializacion de los botones
+        initializeButtons();
+
+        // cargado de el valor actual de cuota diaria en el campo de texto
+        cargarValorCuotaDiaria();
+
+        // Acción para el botón Aceptar
+        btnAceptar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                if (actualizarCuotaDiaria()) {
+                    dispose();
+                }
+            }
+        });
+
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    private void initializeLabelsAndFields() {
+        lblNewLabel = new JLabel("Cuota diaria esperada (S/.)");
+        lblNewLabel.setBounds(10, 11, 146, 14);
+        contentPane.add(lblNewLabel);
+
+        textField = new JTextField();
+        textField.setBounds(157, 8, 171, 25);
+        contentPane.add(textField);
+        textField.setColumns(10);
+    }
+
+    private void initializeButtons() {
+        btnAceptar = new JButton("Aceptar");
+        btnAceptar.setBounds(353, 7, 101, 26);
+        contentPane.add(btnAceptar);
+
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(353, 37, 101, 26);
+        contentPane.add(btnCancelar);
+    }
+
+    // cargar el valor actual de cuota diaria en el campo de texto
+    private void cargarValorCuotaDiaria() {
+        textField.setText(String.valueOf(Tienda.cuotaDiaria));
+    }
+
+    // validar y actualizar la cuota diaria si el valor es válido -ramirinxd
+    private boolean actualizarCuotaDiaria() {
+        try {
+            double cuota = Double.parseDouble(textField.getText());
+            if (cuota < 0) {
+                JOptionPane.showMessageDialog(null, "La cuota diaria no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            Tienda.cuotaDiaria = cuota;
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+}

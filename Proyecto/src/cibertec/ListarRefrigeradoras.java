@@ -3,6 +3,7 @@ package cibertec;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ public class ListarRefrigeradoras extends JDialog {
 
 	public ListarRefrigeradoras() {
 		setTitle("Listado de refrigeradoras");
+		setIconImage(new ImageIcon("images/favicon.jpg").getImage());
 		setBounds(100, 100, 400, 300);
 		setModal(true);
 		getContentPane().setLayout(null);

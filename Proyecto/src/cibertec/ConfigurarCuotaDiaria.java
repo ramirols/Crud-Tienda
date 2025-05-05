@@ -1,5 +1,6 @@
 package cibertec;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,22 +23,19 @@ public class ConfigurarCuotaDiaria extends JDialog {
 
     public ConfigurarCuotaDiaria() {
         setTitle("Configurar cuota diaria");
+        setIconImage(new ImageIcon("images/favicon.jpg").getImage());
         setBounds(100, 100, 480, 112);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // iicializar etiquetas y campos de texto
         initializeLabelsAndFields();
 
-        // inicializacion de los botones
         initializeButtons();
 
-        // cargado de el valor actual de cuota diaria en el campo de texto
         cargarValorCuotaDiaria();
 
-        // Acción para el botón Aceptar
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -83,11 +81,15 @@ public class ConfigurarCuotaDiaria extends JDialog {
     // validar y actualizar la cuota diaria si el valor es válido
     private boolean actualizarCuotaDiaria() {
         try {
-            Tienda.cuotaDiaria = Double.parseDouble(textField.getText());
+            double cuota = Double.parseDouble(textField.getText());
+            if (cuota < 0) {
+                JOptionPane.showMessageDialog(null, "La cuota diaria no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            Tienda.cuotaDiaria = cuota;
         } catch (NumberFormatException ex) {
-            // mostrar un mensaje de error si el valor no es válido
             JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // no actualizar el valor
+            return false;
         }
         return true;
     }

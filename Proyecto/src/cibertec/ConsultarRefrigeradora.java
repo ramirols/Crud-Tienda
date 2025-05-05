@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class ConsultarRefrigeradora extends JDialog {
 	private JLabel lblNewLabel;
@@ -34,6 +35,7 @@ public class ConsultarRefrigeradora extends JDialog {
 	public ConsultarRefrigeradora() {
 		setResizable(false);
 		setTitle("Consultar Refrigeradora");
+		setIconImage(new ImageIcon("images/favicon.jpg").getImage());
 		setBounds(100, 100, 451, 206);
 		getContentPane().setLayout(null);
 

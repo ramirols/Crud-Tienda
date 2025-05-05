@@ -5,6 +5,13 @@
 		<item key="replaceBarOpen" value="false"/>
 		<item key="selection" value="private int[] ventasPorModelo = {2, 2, 2, 2, 2};"/>
 		<list key="findhistory">
+			<item value="btnFacebook"/>
+			<item value="setLayout(null)"/>
+			<item value="btnTwi"/>
+			<item value="JPanel panelCentral"/>
+			<item value="contentP"/>
+			<item value="setVisible(true)"/>
+			<item value="setVisi"/>
 			<item value="&#x09;public static int cantidadVentas0 = 0;"/>
 			<item value="String"/>
 			<item value="promedios"/>
@@ -13,7 +20,6 @@
 			<item value="private int[] ventasPorModelo = {2, 2, 2, 2, 2};"/>
 			<item value="mostrarVentasPorModelo"/>
 			<item value="mostrar"/>
-			<item value="unidadesVendidas"/>
 		</list>
 	</section>
 </section>

@@ -2,6 +2,8 @@ package cibertec;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,24 +22,22 @@ public class ConfigurarObsequios extends JDialog {
 
     public ConfigurarObsequios() {
         setTitle("Configurar obsequios");
+        setIconImage(new ImageIcon("images/favicon.jpg").getImage());
         setBounds(100, 100, 450, 152);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // iniciar las etiquetas y campos de texto
         initializeLabelsAndFields();
 
-        // inicializar botones
         initializeButtons();
 
-        // cargar los valores actuales de los obsequios en los campos de texto
         cargarValoresObsequios();
 
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // actualizar los obsequios
+                // actualizacioj de los obsequios
                 if (actualizarObsequios()) {
                     dispose();
                 }
@@ -97,15 +97,16 @@ public class ConfigurarObsequios extends JDialog {
     }
 
     private boolean actualizarObsequios() {
-        try {
-            Tienda.obsequio1 = textField.getText();
-            Tienda.obsequio2 = textField_1.getText();
-            Tienda.obsequio3 = textField_2.getText();
-        } catch (Exception ex) {
-            // si los mensajes no son válidos, mostrar
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese valores válidos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // no actualiza los valores
+        if (textField.getText().matches(".*\\d.*") ||
+            textField_1.getText().matches(".*\\d.*") ||
+            textField_2.getText().matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(this, "No se permiten números en los obsequios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
+
+        Tienda.obsequio1 = textField.getText();
+        Tienda.obsequio2 = textField_1.getText();
+        Tienda.obsequio3 = textField_2.getText();
         return true;
     }
 }

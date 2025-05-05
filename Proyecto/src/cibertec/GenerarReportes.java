@@ -16,10 +16,10 @@ public class GenerarReportes extends JDialog implements ActionListener {
     private JButton btnCerrar;
 
     private String[] tiposReportes = {
-        "Ventas por Modelo",
-        "Ventas en Relación a la Venta Óptima",
-        "Precios en Relación al Precio Promedio",
-        "Promedios, Menores y Mayores"
+            "Ventas por Modelo",
+            "Ventas en Relación a la Venta Óptima",
+            "Precios en Relación al Precio Promedio",
+            "Promedios, Menores y Mayores"
     };
 
     public static void main(String[] args) {
@@ -37,6 +37,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
 
     public GenerarReportes() {
         setTitle("Generar reportes");
+        setIconImage(new ImageIcon("images/favicon.jpg").getImage());
         setBounds(100, 100, 550, 341);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,7 +58,10 @@ public class GenerarReportes extends JDialog implements ActionListener {
         contentPane.add(scrollPane);
 
         textArea = new JTextArea();
+        textArea.setEditable(false);
         scrollPane.setViewportView(textArea);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
 
         btnCerrar = new JButton("Cerrar");
         btnCerrar.setBounds(403, 10, 121, 30);

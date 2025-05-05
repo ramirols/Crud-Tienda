@@ -1,5 +1,6 @@
 package cibertec;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -27,6 +28,7 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
 
     public AcercaDeTienda() {
         setTitle("Acerca de Tienda");
+        setIconImage(new ImageIcon("images/favicon.jpg").getImage());
         setBounds(100, 100, 444, 353);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -36,7 +38,6 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         initializeComponents();
     }
 
-    // método para inicializar todos los componentes
     private void initializeComponents() {
         lblTitle = new JLabel("TIENDA 1.0");
         lblTitle.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -61,7 +62,7 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         lblAuthor1.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthor1);
 
-        lblAuthor2 = new JLabel("Jhon Rosales");
+        lblAuthor2 = new JLabel("Yhon Rosales");
         lblAuthor2.setFont(new Font("Tahoma", Font.BOLD, 17));
         lblAuthor2.setBounds(146, 152, 128, 14);
         lblAuthor2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,7 +74,7 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         lblAuthor3.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthor3);
 
-        lblAuthor4 = new JLabel("Ramiro Sanchez");
+        lblAuthor4 = new JLabel("Ramiro Leonardo");
         lblAuthor4.setFont(new Font("Tahoma", Font.BOLD, 17));
         lblAuthor4.setBounds(136, 207, 155, 14);
         lblAuthor4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -91,7 +92,6 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         }
     }
 
-    // Método para cerrar el JDialog
     private void closeDialog() {
         dispose();
     }

@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class ModificarRefrigeradora extends JDialog {
 	private JLabel lblNewLabel;
@@ -26,6 +27,7 @@ public class ModificarRefrigeradora extends JDialog {
 	public ModificarRefrigeradora() {
 		setResizable(false);
 		setTitle("Modificar Refrigeradora");
+		setIconImage(new ImageIcon("images/favicon.jpg").getImage());
 		setBounds(100, 100, 451, 206);
 		getContentPane().setLayout(null);
 
@@ -149,6 +151,11 @@ public class ModificarRefrigeradora extends JDialog {
 			int nuevoAlto = (int) Double.parseDouble(txtAlto.getText());
 			int nuevoFondo = (int) Double.parseDouble(txtFondo.getText());
 
+			if (nuevoPrecio < 0 || nuevoAncho < 0 || nuevoAlto < 0 || nuevoFondo < 0) {
+				javax.swing.JOptionPane.showMessageDialog(this, "No se permiten valores negativos.");
+				return;
+			}
+			
 			switch (index) {
 				case 0:
 					Tienda.precio0 = nuevoPrecio;
@@ -181,10 +188,12 @@ public class ModificarRefrigeradora extends JDialog {
 					Tienda.fondo4 = nuevoFondo;
 					break;
 			}
+			
 			dispose();
+			
 		} catch (NumberFormatException ex) {
-			System.out.println("Error en formato numérico: " + ex.getMessage());
-		}
+	        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese solo números válidos. No se permite texto.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+	    }
 	}
 }
 

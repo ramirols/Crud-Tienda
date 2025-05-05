@@ -1,5 +1,6 @@
 package cibertec;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,27 +23,23 @@ public class ConfigurarCantidadOptima extends JDialog {
 
     public ConfigurarCantidadOptima() {
         setTitle("Configurar cantidad óptima");
+        setIconImage(new ImageIcon("images/favicon.jpg").getImage());
         setBounds(100, 100, 485, 114);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // inicializar etiquetas y campos de texto
         initializeLabelsAndFields();
 
-        // iknicializar botones
         initializeButtons();
 
-        // cargar el valor actual de cantidad óptima en el campo de texto
         cargarValorCantidadOptima();
 
-        // Acción para el botón Aceptar
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // actualizacion de la cantidad optima
                 if (actualizarCantidadOptima()) {
-                    dispose(); // Cerrar el JDialog
+                    dispose();
                 }
             }
         });
@@ -54,7 +51,6 @@ public class ConfigurarCantidadOptima extends JDialog {
         });
     }
 
-    // inicializar las etiquetas y los campos de texto
     private void initializeLabelsAndFields() {
         lblNewLabel = new JLabel("Cantidad óptima de unidades vendidas");
         lblNewLabel.setBounds(10, 11, 201, 20);
@@ -66,7 +62,6 @@ public class ConfigurarCantidadOptima extends JDialog {
         textField.setColumns(10);
     }
 
-    // Inicializar los botones
     private void initializeButtons() {
         btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(351, 10, 108, 26);
@@ -85,12 +80,16 @@ public class ConfigurarCantidadOptima extends JDialog {
     // validar y actualizar la cantidad óptima si el valor es válido
     private boolean actualizarCantidadOptima() {
         try {
-            Tienda.cantidadOptima = Integer.parseInt(textField.getText());
+            int cantidad = Integer.parseInt(textField.getText());
+            if (cantidad < 0) {
+                JOptionPane.showMessageDialog(null, "La cantidad no puede ser negativa.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            Tienda.cantidadOptima = cantidad;
         } catch (NumberFormatException ex) {
-            // si el valor no es válido, mostrar error. (manejado con promesas)
             JOptionPane.showMessageDialog(null, "Por favor, ingrese un valor numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // el valor no se actualiza
+            return false;
         }
-        return true; // valor actualizado
+        return true;
     }
 }

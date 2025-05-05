@@ -3,6 +3,7 @@ package cibertec;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ public class ConfigurarDescuentos extends JDialog {
 
     public ConfigurarDescuentos() {
         setTitle("Configurar porcentajes de descuento");
+        setIconImage(new ImageIcon("images/favicon.jpg").getImage());
         setBounds(100, 100, 450, 168);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -106,10 +108,29 @@ public class ConfigurarDescuentos extends JDialog {
 
     private boolean actualizarDescuentos() {
         try {
-            Tienda.porcentaje1 = Double.parseDouble(textField.getText());
-            Tienda.porcentaje2 = Double.parseDouble(textField_1.getText());
-            Tienda.porcentaje3 = Double.parseDouble(textField_2.getText());
-            Tienda.porcentaje4 = Double.parseDouble(textField_3.getText());
+            String descuento1 = textField.getText();
+            String descuento2 = textField_1.getText();
+            String descuento3 = textField_2.getText();
+            String descuento4 = textField_3.getText();
+
+            if (descuento1.contains("-") || descuento2.contains("-") || descuento3.contains("-") || descuento4.contains("-")) {
+                JOptionPane.showMessageDialog(null, "Los descuentos no pueden contener un signo negativo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+            Tienda.porcentaje1 = Double.parseDouble(descuento1);
+            Tienda.porcentaje2 = Double.parseDouble(descuento2);
+            Tienda.porcentaje3 = Double.parseDouble(descuento3);
+            Tienda.porcentaje4 = Double.parseDouble(descuento4);
+
+            if (Tienda.porcentaje1 < 0 || Tienda.porcentaje1 > 100 ||
+                Tienda.porcentaje2 < 0 || Tienda.porcentaje2 > 100 ||
+                Tienda.porcentaje3 < 0 || Tienda.porcentaje3 > 100 ||
+                Tienda.porcentaje4 < 0 || Tienda.porcentaje4 > 100) {
+                JOptionPane.showMessageDialog(null, "Los descuentos deben estar entre 0 y 100.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
