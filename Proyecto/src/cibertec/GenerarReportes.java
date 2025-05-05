@@ -22,10 +22,6 @@ public class GenerarReportes extends JDialog implements ActionListener {
         "Promedios, Menores y Mayores"
     };
 
- // Variables para cantidad de ventas y unidades por modelo
-    public static int[] cantidadVentas = new int[5];
-    public static int[] unidadesVendidas = new int[5];
-
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -99,13 +95,17 @@ public class GenerarReportes extends JDialog implements ActionListener {
     private void mostrarVentasPorModelo() {
         String reporte = "VENTAS POR MODELO\n";
         for (int i = 0; i < 5; i++) {
-            double importeTotal = unidadesVendidas[i] * obtenerPrecioPorModelo(i);
+            int cantidadVentas = obtenerCantidadVentas(i);
+            int unidadesVendidas = obtenerUnidadesVendidas(i);
+            double precio = obtenerPrecioPorModelo(i);
+            double importeTotal = unidadesVendidas * precio;
             double aporteCuotaDiaria = (importeTotal / Tienda.cuotaDiaria) * 100;
-            reporte += "Modelo: " + obtenerModeloPorIndice(i) + "\n";
-            reporte += "Cantidad de ventas: " + cantidadVentas[i] + "\n";
-            reporte += "Cantidad de unidades vendidas: " + unidadesVendidas[i] + "\n";
-            reporte += "Importe total vendido: S/. " + String.format("%.2f", importeTotal) + "\n";
-            reporte += "Aporte a la cuota diaria: " + String.format("%.2f", aporteCuotaDiaria) + "%\n\n";
+
+            reporte += "Modelo                         : " + obtenerModeloPorIndice(i) + "\n";
+            reporte += "Cantidad de ventas             : " + cantidadVentas + "\n";
+            reporte += "Cantidad de unidades vendidas  : " + unidadesVendidas + "\n";
+            reporte += "Importe total vendido          : S/. " + String.format("%.2f", importeTotal) + "\n";
+            reporte += "Aporte a la cuota diaria       : " + String.format("%.2f", aporteCuotaDiaria) + "%\n\n";
         }
         textArea.setText(reporte);
     }
@@ -114,14 +114,14 @@ public class GenerarReportes extends JDialog implements ActionListener {
     private void mostrarVentasRelacionVentaOptima() {
         String reporte = "VENTAS EN RELACIÓN A LA VENTA ÓPTIMA\n";
         for (int i = 0; i < 5; i++) {
-            int diferencia = unidadesVendidas[i] - Tienda.cantidadOptima;
+            int diferencia = obtenerUnidadesVendidas(i) - Tienda.cantidadOptima;
             String comparacion = diferencia > 0 ? 
                 "(" + diferencia + " más que la cantidad óptima)" : 
                 (diferencia < 0 ? 
                 "(" + (-diferencia) + " menos que la cantidad óptima)" : 
                 "(igual a la cantidad óptima)");
-            reporte += "Modelo: " + obtenerModeloPorIndice(i) + "\n";
-            reporte += "Cantidad de unidades vendidas: " + unidadesVendidas[i] + " " + comparacion + "\n\n";
+            reporte += "Modelo                         : " + obtenerModeloPorIndice(i) + "\n";
+            reporte += "Cantidad de unidades vendidas  : " + obtenerUnidadesVendidas(i) + " " + comparacion + "\n\n";
         }
         textArea.setText(reporte);
     }
@@ -151,6 +151,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
         double anchoMenor = obtenerAnchoMenor();
         double anchoMayor = obtenerAnchoMayor();
 
+        // renderizacion de promedios, menores y mayores.
         String reporte = "PROMEDIOS, MENORES Y MAYORES\n";
         reporte += "Precio promedio: S/. " + String.format("%.2f", precioPromedio) + "\n";
         reporte += "Precio menor: S/. " + precioMenor + "\n";
@@ -210,4 +211,27 @@ public class GenerarReportes extends JDialog implements ActionListener {
         return Math.max(Math.max(Math.max(Tienda.ancho0, Tienda.ancho1), 
                                  Math.max(Tienda.ancho2, Tienda.ancho3)), Tienda.ancho4);
     }
+    
+    private int obtenerCantidadVentas(int indice) {
+        switch (indice) {
+            case 0: return Tienda.cantidadVentas0;
+            case 1: return Tienda.cantidadVentas1;
+            case 2: return Tienda.cantidadVentas2;
+            case 3: return Tienda.cantidadVentas3;
+            case 4: return Tienda.cantidadVentas4;
+            default: return 0;
+        }
+    }
+
+    private int obtenerUnidadesVendidas(int indice) {
+        switch (indice) {
+            case 0: return Tienda.unidadesVendidas0;
+            case 1: return Tienda.unidadesVendidas1;
+            case 2: return Tienda.unidadesVendidas2;
+            case 3: return Tienda.unidadesVendidas3;
+            case 4: return Tienda.unidadesVendidas4;
+            default: return 0;
+        }
+    }
+
 }

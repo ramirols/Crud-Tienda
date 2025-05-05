@@ -5,6 +5,7 @@
 		<item key="replaceBarOpen" value="false"/>
 		<item key="selection" value="private int[] ventasPorModelo = {2, 2, 2, 2, 2};"/>
 		<list key="findhistory">
+			<item value="&#x09;public static int cantidadVentas0 = 0;"/>
 			<item value="String"/>
 			<item value="promedios"/>
 			<item value="String[]"/>
