@@ -24,7 +24,7 @@ public class Tienda extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
-	// Datos mínimos de la primera refrigeradora
+	// Datos mï¿½nimos de la primera refrigeradora
 	public static String modelo0 = "LG LTCS20020W";
 	public static int cantidadVentas0 = 0;
 	public static double importeTotalVentas0 = 0;
@@ -35,7 +35,7 @@ public class Tienda extends JFrame implements ActionListener {
 	public static double ancho0 = 60.0;
 	public static double alto0 = 91.0;
 	
-	// Datos mínimos de la segunda refrigeradora
+	// Datos mï¿½nimos de la segunda refrigeradora
 	public static String modelo1 = "Samsung RB195ACRS";
 	public static int cantidadVentas1 = 0;
 	public static double importeTotalVentas1 = 0;
@@ -46,7 +46,7 @@ public class Tienda extends JFrame implements ActionListener {
 	public static double alto1 = 94.0;
 	public static double fondo1 = 67.5;
 	
-	// Datos mínimos de la tercera refrigeradora
+	// Datos mï¿½nimos de la tercera refrigeradora
 	public static String modelo2 = " Whirlpool WRT318FZDM";
 	public static int cantidadVentas2 = 0;
 	public static double importeTotalVentas2 = 0;
@@ -57,7 +57,7 @@ public class Tienda extends JFrame implements ActionListener {
 	public static double alto2 = 90.0;
 	public static double fondo2 = 50.0;
 	
-	// Datos mínimos de la cuarta refrigeradora
+	// Datos mï¿½nimos de la cuarta refrigeradora
 	public static String modelo3 = "Bosch B36BT930NS";
 	public static int cantidadVentas3 = 0;
 	public static double importeTotalVentas3 = 0;
@@ -68,7 +68,7 @@ public class Tienda extends JFrame implements ActionListener {
 	public static double alto3 = 95.0;
 	public static double fondo3 = 51.5;
 	
-	// Datos mínimos de la quinta refrigeradora
+	// Datos mï¿½nimos de la quinta refrigeradora
 	public static String modelo4 = "LG LSXS26366S";
 	public static int cantidadVentas4 = 0;
 	public static double importeTotalVentas4 = 0;
@@ -91,7 +91,7 @@ public class Tienda extends JFrame implements ActionListener {
 	public static String obsequio2 = "Licuadora";
 	public static String obsequio3 = "Extractor";
 	
-	// Cantidad óptima de unidades vendidas
+	// Cantidad ï¿½ptima de unidades vendidas
 	public static int cantidadOptima = 30;
 	
 	// Contador de ventas total
@@ -250,6 +250,7 @@ public class Tienda extends JFrame implements ActionListener {
 		mnNewMenu_4.add(btnMenuAcercaDeTienda);
 	}
 
+	// manejador de eventos, hace click y llama a los mÃ©todos de la clase principal, comprueba que los botones o los items de menu (tabs) fue clickeado y llama al metodo correspondiente.
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnMenuAcercaDeTienda) {
 			actionPerformedBtnMenuAcercaDeTienda(e);
@@ -287,7 +288,7 @@ public class Tienda extends JFrame implements ActionListener {
 		
 	}
 	
-	// renderizacion de los popups / modales para visualización de contenido.
+	// renderizacion de los popups / modales para visualizaciï¿½n de contenido.
 	protected void actionPerformedMntmNewMenuItem(ActionEvent e) {
 		System.exit(0);
 	}
