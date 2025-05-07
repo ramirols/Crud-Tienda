@@ -12,9 +12,11 @@ public class Vender extends JDialog implements ActionListener {
 	private JLabel lblModelo;
 	private JLabel lblPrecio;
 	private JLabel lblCantidad;
+	private JLabel lblNombre;
 	private JComboBox<String> comboBox;
 	private JTextField txtPrecio;
 	private JTextField txtCantidad;
+	//private JTextField txtNombre;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
 	private JButton btnVender;
@@ -27,6 +29,7 @@ public class Vender extends JDialog implements ActionListener {
 		Tienda.modelo3,
 		Tienda.modelo4
 	};
+	private JTextField txtNombre;
 
 	private double obtenerPrecioActual(int index) {
 		switch(index) {
@@ -39,8 +42,8 @@ public class Vender extends JDialog implements ActionListener {
 		}
 	}
 
-	private int contadorVentas = 0;
-	private double importeTotalAcumulado = 0;
+	//private int contadorVentas = 0;
+	//private double importeTotalAcumulado = 0;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
@@ -71,9 +74,13 @@ public class Vender extends JDialog implements ActionListener {
 		contentPane.add(lblPrecio);
 
 		lblCantidad = new JLabel("Cantidad");
-		lblCantidad.setBounds(10, 90, 59, 14);
+		lblCantidad.setBounds(10, 88, 59, 14);
 		contentPane.add(lblCantidad);
 
+	    lblNombre = new JLabel("Nombre Cliente");
+	    lblNombre.setBounds(10, 123, 83, 14);
+	    contentPane.add(lblNombre);
+		
 		comboBox = new JComboBox<>();
 		comboBox.setModel(new DefaultComboBoxModel<>(modelos));
 		comboBox.setBounds(96, 7, 191, 22);
@@ -86,12 +93,12 @@ public class Vender extends JDialog implements ActionListener {
 		txtPrecio.setColumns(10);
 
 		txtCantidad = new JTextField();
-		txtCantidad.setBounds(96, 87, 191, 20);
+		txtCantidad.setBounds(96, 85, 191, 20);
 		contentPane.add(txtCantidad);
 		txtCantidad.setColumns(10);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 138, 514, 200);
+		scrollPane.setBounds(10, 148, 514, 190);
 		contentPane.add(scrollPane);
 
 		textArea = new JTextArea();
@@ -105,6 +112,11 @@ public class Vender extends JDialog implements ActionListener {
 		btnCerrar = new JButton("Cerrar");
 		btnCerrar.setBounds(407, 65, 117, 30);
 		contentPane.add(btnCerrar);
+		
+		txtNombre = new JTextField();
+		txtNombre.setBounds(96, 120, 191, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 
 		comboBox.addActionListener(this);
 		btnVender.addActionListener(this);
@@ -129,6 +141,16 @@ public class Vender extends JDialog implements ActionListener {
 	}
 
 	private void vender() {
+		// validacion de nombre del cliente
+		String nombreCliente = txtNombre.getText().trim();
+        if (nombreCliente.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el nombre del cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+		
+        // guardamos el nombre del cliente para la variable de tienda
+        Tienda.nombreCliente = nombreCliente;
+        
 		int modeloIndex = comboBox.getSelectedIndex();
 		String modelo = modelos[modeloIndex];
 		double precio = obtenerPrecioActual(modeloIndex);
@@ -138,7 +160,7 @@ public class Vender extends JDialog implements ActionListener {
 	        cantidad = Integer.parseInt(txtCantidad.getText());
 	        if (cantidad <= 0) throw new NumberFormatException();
 	    } catch (NumberFormatException ex) {
-	        JOptionPane.showMessageDialog(this, "Ingrese una cantidad valida. (no puede ser negativa)", "Error", JOptionPane.ERROR_MESSAGE);
+	        JOptionPane.showMessageDialog(this, "Ingrese una cantidad valida.", "Error", JOptionPane.ERROR_MESSAGE);
 	        return;
 	    }
 
@@ -158,9 +180,22 @@ public class Vender extends JDialog implements ActionListener {
 	    double importePagar = importeCompra - importeDescuento;
 	    String obsequio = obtenerObsequio(cantidad);
 
+	    // Actualización de datos en Tienda
+	    switch (modeloIndex) {
+	        case 0: Tienda.cantidadVentas0 += 1; Tienda.unidadesVendidas0 += cantidad; break;
+	        case 1: Tienda.cantidadVentas1 += 1; Tienda.unidadesVendidas1 += cantidad; break;
+	        case 2: Tienda.cantidadVentas2 += 1; Tienda.unidadesVendidas2 += cantidad; break;
+	        case 3: Tienda.cantidadVentas3 += 1; Tienda.unidadesVendidas3 += cantidad; break;
+	        case 4: Tienda.cantidadVentas4 += 1; Tienda.unidadesVendidas4 += cantidad; break;
+	    }
+
+	    Tienda.contadorVentas++;
+	    Tienda.importeTotalAcumulado += importePagar;
+	    
 		// mostrar la boleta de acuerdo a los datos solicitados
 		textArea.setText("");
 	    textArea.append("== BOLETA DE VENTA ==\n\n");
+	    textArea.append("Cliente: " + nombreCliente + "\n");
 	    textArea.append("Modelo: " + modelo + "\n");
 	    textArea.append(String.format("Precio unitario: S/ %.2f\n", precio));
 	    textArea.append("Cantidad: " + cantidad + "\n");
@@ -169,15 +204,15 @@ public class Vender extends JDialog implements ActionListener {
 	    textArea.append(String.format("Importe a pagar: S/ %.2f\n", importePagar));
 	    textArea.append("Obsequio: " + obsequio + "\n");
 
-		contadorVentas++;
-		importeTotalAcumulado += importePagar;
+		Tienda.unidadesVendidas++;
+		Tienda.importeTotalAcumulado += importePagar;
 
 		// mostrar alerta cada 5 ventas
-		if (contadorVentas % 5 == 0) {
-			double porcentajeCuota = importeTotalAcumulado / Tienda.cuotaDiaria * 100;
+		if (Tienda.contadorVentas % 5 == 0) {
+			double porcentajeCuota = Tienda.importeTotalAcumulado / Tienda.cuotaDiaria * 100;
 			JOptionPane.showMessageDialog(this,
-				"Venta número: " + contadorVentas +
-				"\nImporte total acumulado: S/ " + String.format("%.2f", importeTotalAcumulado) +
+				"Venta número: " + Tienda.contadorVentas +
+				"\nImporte total acumulado: S/ " + String.format("%.2f", Tienda.importeTotalAcumulado) +
 				"\nPorcentaje de cuota diaria alcanzado: " + String.format("%.2f", porcentajeCuota) + "%",
 				"Alerta de Ventas",
 				JOptionPane.INFORMATION_MESSAGE

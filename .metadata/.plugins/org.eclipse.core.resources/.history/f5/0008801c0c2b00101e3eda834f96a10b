@@ -1,0 +1,144 @@
+package cibertec;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.border.EmptyBorder;
+
+public class Vender extends JDialog implements ActionListener {
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JLabel lblModelo;
+    private JLabel lblPrecio;
+    private JLabel lblCantidad;
+    private JComboBox<String> comboBox;
+    private JTextField txtPrecio;
+    private JTextField txtCantidad;
+    private JScrollPane scrollPane;
+    private JTextArea textArea;
+    private JButton btnVender;
+    private JButton btnCerrar;
+
+    private String[] modelos = {
+        Tienda.modelo0,
+        Tienda.modelo1,
+        Tienda.modelo2,
+        Tienda.modelo3,
+        Tienda.modelo4
+    };
+
+    private double obtenerPrecioActual(int index) {
+        switch(index) {
+            case 0: return Tienda.precio0;
+            case 1: return Tienda.precio1;
+            case 2: return Tienda.precio2;
+            case 3: return Tienda.precio3;
+            case 4: return Tienda.precio4;
+            default: return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                Vender frame = new Vender();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public Vender() {
+        setTitle("Vender");
+        setIconImage(new ImageIcon("images/favicon.jpg").getImage());
+        setBounds(100, 100, 546, 399);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        lblModelo = new JLabel("Modelo");
+        lblModelo.setBounds(10, 11, 59, 14);
+        contentPane.add(lblModelo);
+
+        lblPrecio = new JLabel("Precio (S/)");
+        lblPrecio.setBounds(10, 47, 59, 14);
+        contentPane.add(lblPrecio);
+
+        lblCantidad = new JLabel("Cantidad");
+        lblCantidad.setBounds(10, 90, 59, 14);
+        contentPane.add(lblCantidad);
+
+        comboBox = new JComboBox<>();
+        comboBox.setModel(new DefaultComboBoxModel<>(modelos));
+        comboBox.setBounds(96, 7, 191, 22);
+        contentPane.add(comboBox);
+
+        txtPrecio = new JTextField();
+        txtPrecio.setEditable(false);
+        txtPrecio.setBounds(96, 44, 191, 20);
+        contentPane.add(txtPrecio);
+
+        txtCantidad = new JTextField();
+        txtCantidad.setBounds(96, 87, 191, 20);
+        contentPane.add(txtCantidad);
+
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 138, 514, 200);
+        contentPane.add(scrollPane);
+
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        scrollPane.setViewportView(textArea);
+
+        btnVender = new JButton("Vender");
+        btnVender.setBounds(407, 24, 117, 30);
+        contentPane.add(btnVender);
+
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setBounds(407, 65, 117, 30);
+        contentPane.add(btnCerrar);
+
+        comboBox.addActionListener(this);
+        btnVender.addActionListener(this);
+        btnCerrar.addActionListener(this);
+
+        mostrarPrecio(0);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == comboBox) {
+            mostrarPrecio(comboBox.getSelectedIndex());
+        } else if (e.getSource() == btnVender) {
+            vender();
+        } else if (e.getSource() == btnCerrar) {
+            dispose();
+        }
+    }
+
+    private void mostrarPrecio(int index) {
+        txtPrecio.setText(String.format("%.2f", obtenerPrecioActual(index)));
+    }
+
+    private void vender() {
+        int modeloIndex = comboBox.getSelectedIndex();
+        String modelo = modelos[modeloIndex];
+        double precio = obtenerPrecioActual(modeloIndex);
+        int cantidad;
+
+        try {
+            cantidad = Integer.parseInt(txtCantidad.getText());
+            if (cantidad <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        double importeCompra = precio * cantidad;
+        Tienda.contadorVentas++;
+        Tienda.importeTotalAcumulado += importeCompra;
+
+        textArea.setText("Venta realizada.\nModelo: " + modelo + "\nCantidad: " + cantidad);
+    }
+}

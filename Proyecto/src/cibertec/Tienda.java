@@ -94,9 +94,20 @@ public class Tienda extends JFrame implements ActionListener {
 	// Cantidad óptima de unidades vendidas
 	public static int cantidadOptima = 30;
 	
+	// Contador de ventas total
+	public static int contadorVentas = 0;
+
+	// Importe total acumulado de todas las ventas
+	public static double importeTotalAcumulado = 0;
+
+	// Unidades vendidas en total
+	public static int unidadesVendidas = 0;
+	
 	// Cuota diaria
 	public static double cuotaDiaria = 75000;
 	
+	// nombre del cliente para manejos globales
+	public static String nombreCliente = "";
 	
 	private JMenuBar menuBar;
 	private JMenu mnNewMenu;
@@ -165,7 +176,7 @@ public class Tienda extends JFrame implements ActionListener {
 		JLabel lblBienvenida = new JLabel(imagenBienvenida);
 		lblBienvenida.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		JLabel lblTexto = new JLabel("Bienvenido/a a Tienda - iramirin!");
+		JLabel lblTexto = new JLabel("Bienvenido/a a Tienda - Shop Ls");
 		lblTexto.setFont(new Font("Arial", Font.BOLD, 20));
 		lblTexto.setAlignmentX(Component.CENTER_ALIGNMENT);
 

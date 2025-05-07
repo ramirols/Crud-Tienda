@@ -97,7 +97,12 @@ public class GenerarReportes extends JDialog implements ActionListener {
 
     // método para mostrar las ventas por modelo
     private void mostrarVentasPorModelo() {
-        String reporte = "VENTAS POR MODELO\n";
+        String reporte = "==VENTAS POR MODELO==\n\n";
+        
+        if (!Tienda.nombreCliente.isEmpty()) {
+            reporte += "Cliente: " + Tienda.nombreCliente + "\n\n";
+        }
+
         for (int i = 0; i < 5; i++) {
             int cantidadVentas = obtenerCantidadVentas(i);
             int unidadesVendidas = obtenerUnidadesVendidas(i);
@@ -116,7 +121,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
 
     // método para mostrar las ventas en relación a la venta óptima
     private void mostrarVentasRelacionVentaOptima() {
-        String reporte = "VENTAS EN RELACIÓN A LA VENTA ÓPTIMA\n";
+        String reporte = "==VENTAS EN RELACIÓN A LA VENTA ÓPTIMA==\n\n";
         for (int i = 0; i < 5; i++) {
             int diferencia = obtenerUnidadesVendidas(i) - Tienda.cantidadOptima;
             String comparacion = diferencia > 0 ? 
@@ -133,7 +138,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
     // método para mostrar los precios en relación al precio promedio
     private void mostrarPreciosRelacionPrecioPromedio() {
         double precioPromedio = obtenerPrecioPromedio();
-        String reporte = "PRECIOS EN RELACIÓN AL PRECIO PROMEDIO\n";
+        String reporte = "==PRECIOS EN RELACIÓN AL PRECIO PROMEDIO==\n\n";
         for (int i = 0; i < 5; i++) {
             double precio = obtenerPrecioPorModelo(i);
             String comparacion = (precio > precioPromedio) ? 
@@ -156,7 +161,7 @@ public class GenerarReportes extends JDialog implements ActionListener {
         double anchoMayor = obtenerAnchoMayor();
 
         // renderizacion de promedios, menores y mayores.
-        String reporte = "PROMEDIOS, MENORES Y MAYORES\n";
+        String reporte = "==PROMEDIOS, MENORES Y MAYORES==\n\n";
         reporte += "Precio promedio: S/. " + String.format("%.2f", precioPromedio) + "\n";
         reporte += "Precio menor: S/. " + precioMenor + "\n";
         reporte += "Precio mayor: S/. " + precioMayor + "\n";

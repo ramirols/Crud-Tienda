@@ -56,7 +56,7 @@ public class AcercaDeTienda extends JDialog implements ActionListener {
         lblAuthors.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAuthors);
 
-        lblAuthor1 = new JLabel("Andy Monkey");
+        lblAuthor1 = new JLabel("Andy Monki");
         lblAuthor1.setFont(new Font("Tahoma", Font.BOLD, 17));
         lblAuthor1.setBounds(136, 124, 155, 19);
         lblAuthor1.setHorizontalAlignment(SwingConstants.CENTER);

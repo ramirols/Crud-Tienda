@@ -5,6 +5,10 @@
 		<item key="replaceBarOpen" value="false"/>
 		<item key="selection" value="private int[] ventasPorModelo = {2, 2, 2, 2, 2};"/>
 		<list key="findhistory">
+			<item value="VENTAS POR MODELO"/>
+			<item value="txtCliente"/>
+			<item value="ventas"/>
+			<item value="txtNombre"/>
 			<item value="btnFacebook"/>
 			<item value="setLayout(null)"/>
 			<item value="btnTwi"/>
@@ -16,10 +20,6 @@
 			<item value="String"/>
 			<item value="promedios"/>
 			<item value="String[]"/>
-			<item value="Tienda"/>
-			<item value="private int[] ventasPorModelo = {2, 2, 2, 2, 2};"/>
-			<item value="mostrarVentasPorModelo"/>
-			<item value="mostrar"/>
 		</list>
 	</section>
 </section>
